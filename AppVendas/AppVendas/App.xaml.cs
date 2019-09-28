@@ -13,10 +13,11 @@ namespace AppVendas
             InitializeComponent();
 
             CultureInfo.DefaultThreadCurrentCulture = new CultureInfo("pt-BR");
-            DependencyService.Register<MockDataStore>();
-            DependencyService.Register<MockDataStoreClientes>();
 
-            MainPage = new MainPage();
+            DependencyService.Register<MockDataStoreClientes>();
+            DependencyService.Register<MockDataStoreProdutos>();
+
+            MainPage = new NavigationPage(new ClientesPage());
         }
 
         protected override void OnStart()

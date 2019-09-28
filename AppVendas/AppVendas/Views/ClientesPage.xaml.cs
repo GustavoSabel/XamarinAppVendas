@@ -1,4 +1,5 @@
-﻿using AppVendas.ViewModels;
+﻿using AppVendas.Models;
+using AppVendas.ViewModels;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
@@ -23,6 +24,13 @@ namespace AppVendas.Views
             {
                 viewModel.LoadCommand.Execute(null);
             }
+        }
+
+        private void TapGestureRecognizer_Tapped(object sender, System.EventArgs e)
+        {
+            var tappedEventArgs = (TappedEventArgs)e;
+            var cliente = (Cliente)tappedEventArgs.Parameter;
+            Navigation.PushAsync(new NovoPedidoPage(cliente));
         }
     }
 }

@@ -5,7 +5,8 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:local="clr-namespace:AppVendas.Converters"
              mc:Ignorable="d"
-             x:Class="AppVendas.Views.ClientesPage">
+             x:Class="AppVendas.Views.ClientesPage"
+             Title="Clientes">
 
     <ContentPage.Resources>
         <ResourceDictionary>
@@ -15,38 +16,39 @@
         </ResourceDictionary>
     </ContentPage.Resources>
     
-    <CollectionView ItemsSource="{Binding Clientes}" EmptyView = "Nenhum cliente encontrado">
-        <CollectionView.ItemTemplate>
-            <DataTemplate>
-                <Grid Padding="10" >
-                    <Grid.RowDefinitions>
-                        
-                        <RowDefinition Height="Auto" />
-                        <RowDefinition Height="Auto" />
-                        <RowDefinition Height="Auto" />
-                    </Grid.RowDefinitions>
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="Auto" />
-                    </Grid.ColumnDefinitions>
-                   
-                    <StackLayout Orientation="Horizontal" Grid.Row="0">
-                        <Label Text="Razão Social:"/>
-                        <Label Text="{Binding RazaoSocial}" FontAttributes="Bold"/>
-                    </StackLayout>
-                    <StackLayout Orientation="Horizontal" Grid.Row="1">
-                        <Label Text="Fantasia:"/>
-                        <Label Text="{Binding NomeFantasia}"/>
-                    </StackLayout>
-                    <StackLayout Orientation="Horizontal" Grid.Row="2">
-                        <Label Text="{Binding CidadeEstado}"/>
-                        <StackLayout Orientation="Horizontal" IsVisible="{Binding DataUltimoPedido, Converter={StaticResource IsNotNull}}">
-                            <Label Text="- última pedido em" FontSize="Small" FontAttributes="Italic" />
-                            <Label Text="{Binding DataUltimoPedido, Converter={StaticResource DateTimeToString}}" FontSize="Small" FontAttributes="Italic" />
+    <ContentPage.Content>
+        <CollectionView ItemsSource="{Binding Clientes}" EmptyView = "Nenhum cliente encontrado" >
+            <CollectionView.ItemTemplate>
+                <DataTemplate>
+                    <Grid Padding="{StaticResource PaddingGrid}">
+                        <Grid.GestureRecognizers>
+                            <TapGestureRecognizer Tapped="TapGestureRecognizer_Tapped" CommandParameter="{Binding .}"/>
+                        </Grid.GestureRecognizers>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="Auto" />
+                        </Grid.RowDefinitions>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="Auto" />
+                        </Grid.ColumnDefinitions>
+
+                        <StackLayout Orientation="Horizontal" Grid.Row="0">
+                            <Label Text="{Binding NomeFantasia}" FontAttributes="Bold" FontSize="Medium" HorizontalOptions="Fill"/>
+                            <Label Text="{Binding CidadeEstado}" HorizontalOptions="End" VerticalOptions="End"/>
                         </StackLayout>
-                    </StackLayout>
-                </Grid>
-            </DataTemplate>
-        </CollectionView.ItemTemplate>
-    </CollectionView>
-    
+                        <StackLayout Orientation="Horizontal" Grid.Row="1">
+                            <Label Text="{Binding RazaoSocial}" />
+                            <Label 
+                                IsVisible="{Binding DataUltimoPedido, Converter={StaticResource IsNotNull}}"
+                                Text="{Binding DataUltimoPedido, Converter={StaticResource DateTimeToString}, StringFormat='(Último ped.: {0})'}" 
+                                FontSize="Micro" 
+                                FontAttributes="Italic" 
+                                VerticalOptions="End"/>
+                        </StackLayout>
+                    </Grid>
+                </DataTemplate>
+            </CollectionView.ItemTemplate>
+        </CollectionView>
+    </ContentPage.Content>
 </ContentPage>

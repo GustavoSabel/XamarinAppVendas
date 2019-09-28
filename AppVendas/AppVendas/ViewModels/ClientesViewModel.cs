@@ -30,7 +30,7 @@ namespace AppVendas.ViewModels
             try
             {
                 Clientes.Clear();
-                var items = await DataStore.GetManyAsync(true);
+                var items = await DataStore.GetManyAsync();
                 foreach (var item in items)
                 {
                     Clientes.Add(item);

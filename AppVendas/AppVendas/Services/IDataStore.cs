@@ -8,8 +8,8 @@ namespace AppVendas.Services
     {
         Task<bool> AddAsync(T item);
         Task<bool> UpdateAsync(T item);
-        Task<bool> DeleteAsync(string id);
-        Task<T> GetAsync(string id);
-        Task<IEnumerable<T>> GetManyAsync(bool forceRefresh = false);
+        Task<bool> DeleteAsync(int id);
+        Task<T> GetAsync(int id);
+        Task<IEnumerable<T>> GetManyAsync();
     }
 }
