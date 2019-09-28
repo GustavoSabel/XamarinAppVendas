@@ -1,0 +1,50 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:local="clr-namespace:AppVendas.Converters"
+             mc:Ignorable="d"
+             x:Class="AppVendas.Views.ClientesPage">
+
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <local:DateTimeToStringConverter x:Key="DateTimeToString" NullText="---" />
+            <local:IsNullConverter x:Key="IsNull" />
+            <local:IsNotNullConverter x:Key="IsNotNull" />
+        </ResourceDictionary>
+    </ContentPage.Resources>
+    
+    <CollectionView ItemsSource="{Binding Clientes}" EmptyView = "Nenhum cliente encontrado">
+        <CollectionView.ItemTemplate>
+            <DataTemplate>
+                <Grid Padding="10">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="Auto" />
+                    </Grid.ColumnDefinitions>
+                    <StackLayout Orientation="Horizontal" Grid.Row="0">
+                        <Label Text="Razão Social:"/>
+                        <Label Text="{Binding RazaoSocial}"/>
+                    </StackLayout>
+                    <StackLayout Orientation="Horizontal" Grid.Row="1">
+                        <Label Text="Fantasia:"/>
+                        <Label Text="{Binding NomeFantasia}"/>
+                    </StackLayout>
+                    <StackLayout Orientation="Horizontal" Grid.Row="2">
+                        <Label Text="{Binding CidadeEstado}"/>
+                        <Label Text="- última pedido em"
+                               IsVisible="{Binding DataUltimoPedido, Converter={StaticResource IsNotNull}}" />
+                        <Label Text="{Binding DataUltimoPedido, Converter={StaticResource DateTimeToString}}"  
+                               IsVisible="{Binding DataUltimoPedido, Converter={StaticResource IsNotNull}}"/>
+                    </StackLayout>
+                </Grid>
+            </DataTemplate>
+        </CollectionView.ItemTemplate>
+    </CollectionView>
+    
+</ContentPage>
