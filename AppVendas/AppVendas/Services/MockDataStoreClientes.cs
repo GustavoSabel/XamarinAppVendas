@@ -15,10 +15,10 @@ namespace AppVendas.Services
         {
             Add("Danimar LTDA", "Danimar", new DateTime(2019, 09, 15), "Gaspar", "SC");
             Add("Masala", "Masala", new DateTime(2019, 02, 07), "Itajaí", "SC");
-            Add("Nuanoak", "", null, "Telêmaco Borba", "PR");
-            Add("Zincoci", "", null, "Gaspar", "SC");
-            Add("Adankundîr", "", new DateTime(2019, 05, 18), "Blumenau", "SC");
-            Add("Padaria Do João", "", null, "Gaspar", "SC");
+            Add("Nuanoak", "Nuanoak", null, "Telêmaco Borba", "PR");
+            Add("Zincoci", "Zincoci", null, "Gaspar", "SC");
+            Add("Adankundîr", "Adankundîr", new DateTime(2019, 05, 18), "Blumenau", "SC");
+            Add("Padaria Do João", "Padaria do João", null, "Gaspar", "SC");
             Add("Julio Tiago da Silvao", "", null, "São Paulo", "SP");
         }
 

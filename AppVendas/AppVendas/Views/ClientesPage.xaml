@@ -18,8 +18,9 @@
     <CollectionView ItemsSource="{Binding Clientes}" EmptyView = "Nenhum cliente encontrado">
         <CollectionView.ItemTemplate>
             <DataTemplate>
-                <Grid Padding="10">
+                <Grid Padding="10" >
                     <Grid.RowDefinitions>
+                        
                         <RowDefinition Height="Auto" />
                         <RowDefinition Height="Auto" />
                         <RowDefinition Height="Auto" />
@@ -27,9 +28,10 @@
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="Auto" />
                     </Grid.ColumnDefinitions>
+                   
                     <StackLayout Orientation="Horizontal" Grid.Row="0">
                         <Label Text="Razão Social:"/>
-                        <Label Text="{Binding RazaoSocial}"/>
+                        <Label Text="{Binding RazaoSocial}" FontAttributes="Bold"/>
                     </StackLayout>
                     <StackLayout Orientation="Horizontal" Grid.Row="1">
                         <Label Text="Fantasia:"/>
@@ -37,10 +39,10 @@
                     </StackLayout>
                     <StackLayout Orientation="Horizontal" Grid.Row="2">
                         <Label Text="{Binding CidadeEstado}"/>
-                        <Label Text="- última pedido em"
-                               IsVisible="{Binding DataUltimoPedido, Converter={StaticResource IsNotNull}}" />
-                        <Label Text="{Binding DataUltimoPedido, Converter={StaticResource DateTimeToString}}"  
-                               IsVisible="{Binding DataUltimoPedido, Converter={StaticResource IsNotNull}}"/>
+                        <StackLayout Orientation="Horizontal" IsVisible="{Binding DataUltimoPedido, Converter={StaticResource IsNotNull}}">
+                            <Label Text="- última pedido em" FontSize="Small" FontAttributes="Italic" />
+                            <Label Text="{Binding DataUltimoPedido, Converter={StaticResource DateTimeToString}}" FontSize="Small" FontAttributes="Italic" />
+                        </StackLayout>
                     </StackLayout>
                 </Grid>
             </DataTemplate>
