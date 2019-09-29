@@ -7,10 +7,8 @@ using Xamarin.Forms;
 
 namespace AppVendas.ViewModels
 {
-    public class BaseViewModel<T> : INotifyPropertyChanged
+    public class BaseViewModel : INotifyPropertyChanged
     {
-        public static IDataStore<T> DataStore = DependencyService.Get<IDataStore<T>>();
-
         bool isBusy = false;
         public bool IsBusy
         {
@@ -49,5 +47,10 @@ namespace AppVendas.ViewModels
             changed.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
         #endregion
+    }
+
+    public class BaseViewModel<T> : BaseViewModel
+    {
+        public static IDataStore<T> DataStore = DependencyService.Get<IDataStore<T>>();
     }
 }

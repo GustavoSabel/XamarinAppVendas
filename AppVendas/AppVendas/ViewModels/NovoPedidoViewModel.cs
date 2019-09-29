@@ -54,9 +54,10 @@ namespace AppVendas.ViewModels
             }
         }
 
-        public class ProdutoViewModel
+        public class ProdutoViewModel : BaseViewModel
         {
             private readonly Produto _produto;
+            private decimal quantidade;
 
             public ProdutoViewModel(Produto produto)
             {
@@ -69,8 +70,17 @@ namespace AppVendas.ViewModels
             public decimal Valor => _produto.Valor;
             public decimal ValorUnitario => _produto.ValorUnitario;
 
-            public decimal Quantidade { get; set; }
-            public decimal ValorTotal => ValorUnitario * ValorTotal;
+            public decimal Quantidade
+            {
+                get => quantidade;
+                set
+                {
+                    quantidade = value;
+                    OnPropertyChanged();
+                    OnPropertyChanged(nameof(ValorTotal));
+                }
+            }
+            public decimal ValorTotal => ValorUnitario * Quantidade;
         }
     }
 }
