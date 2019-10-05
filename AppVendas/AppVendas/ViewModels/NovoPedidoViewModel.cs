@@ -43,7 +43,12 @@ namespace AppVendas.ViewModels
                 var items = await _dataStoreProdutos.ObterPorCliente(clienteId);
                 foreach (var item in items)
                 {
-                    Produtos.Add(new ProdutoViewModel(item));
+                    var produtoVM = new ProdutoViewModel(item);
+                    Produtos.Add(produtoVM);
+                    produtoVM.PropertyChanged += (sender, e) =>
+                    {
+                        OnPropertyChanged(nameof(ValorTotal));
+                    };
                 }
                 Loaded = true;
             }
@@ -61,19 +66,14 @@ namespace AppVendas.ViewModels
         {
             private readonly Produto _produto;
             private decimal quantidade;
-            public ICommand AdicionarUmCommand { get; }
-            public ICommand RemoverUmCommand { get; }
+
+            public Command AdicionarUmCommand => new Command(AdicionarUm);
+
+            public Command RemoverUmCommand => new Command(SubtrairUm);
 
             public ProdutoViewModel(Produto produto)
             {
                 _produto = produto;
-                AdicionarUmCommand = new Command(() => Quantidade++);
-                RemoverUmCommand = new Command(() =>
-                {
-                    Quantidade--;
-                    if (Quantidade < 0)
-                        Quantidade = 0;
-                });
             }
 
             public int Id => _produto.Id;
@@ -88,10 +88,24 @@ namespace AppVendas.ViewModels
                 set
                 {
                     if (SetProperty(ref quantidade, value))
+                    {
                         OnPropertyChanged(nameof(ValorTotal));
+                    }
                 }
             }
             public decimal ValorTotal => ValorUnitario * Quantidade;
+
+            private void AdicionarUm()
+            {
+                Quantidade++;
+            }
+
+            private void SubtrairUm()
+            {
+                Quantidade--;
+                if (Quantidade < 0)
+                    Quantidade = 0;
+            }
         }
     }
 }

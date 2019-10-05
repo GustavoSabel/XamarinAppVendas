@@ -8,6 +8,8 @@
              x:Class="AppVendas.Views.NovoPedidoPage">
     <ContentPage.Content>
         <StackLayout>
+            <Label Text="{Binding ValorTotal, StringFormat='Valor total: {0:c2}'}" FontSize="Large" FontAttributes="Bold"  />
+            
             <CollectionView ItemsSource="{Binding Produtos}" EmptyView="Nenhum produto encontrado para esse cliente">
                 <CollectionView.ItemTemplate>
                     <DataTemplate>
@@ -26,13 +28,13 @@
                             <Label Grid.Column="1" Text="{Binding Descricao}" FontSize="Large"/>
 
                             <StackLayout Grid.Row="1" Grid.Column="1" Orientation="Horizontal">
-                            
+
                                 <StackLayout Orientation="Vertical">
                                     <Label Text="{Binding Unidade}"/>
                                     <Label Text="{Binding ValorUnitario, StringFormat='Valor Unit.: {0:c2}'}"/>
                                     <Label Text="{Binding ValorTotal, Mode=OneWay, StringFormat='Total: {0:c2}'}"/>
                                 </StackLayout>
-                            
+
                                 <StackLayout Orientation="Vertical">
                                     <ImageButton 
                                         Source="{local:ImageResource Source='AppVendas.Resources.plus_64.png'}" 
@@ -45,21 +47,19 @@
                                         Text="{Binding Quantidade, Mode=TwoWay}" 
                                         Keyboard="Numeric" 
                                         WidthRequest="50" />
-                                
+
                                     <ImageButton 
                                         Source="{local:ImageResource Source='AppVendas.Resources.minus_64.png'}" 
                                         Command="{Binding RemoverUmCommand}"
                                         BackgroundColor="Transparent"/>
                                 </StackLayout>
-                            
+
                             </StackLayout>
-                        
+
                         </Grid>
                     </DataTemplate>
                 </CollectionView.ItemTemplate>
             </CollectionView>
-
-            <Label Text="{Binding ValorTotal, StringFormat='Valor total: {0:c2}'}" />
         </StackLayout>
     </ContentPage.Content>
 </ContentPage>
