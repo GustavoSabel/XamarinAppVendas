@@ -1,4 +1,4 @@
-﻿namespace AppVendas.Models
+﻿namespace AppVendas.Models.Base
 {
     public interface IEntidade
     {

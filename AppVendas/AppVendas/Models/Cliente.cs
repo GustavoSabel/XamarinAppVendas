@@ -1,4 +1,5 @@
-﻿using System;
+﻿using AppVendas.Models.Base;
+using System;
 
 namespace AppVendas.Models
 {

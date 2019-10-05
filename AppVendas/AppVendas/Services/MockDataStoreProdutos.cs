@@ -12,22 +12,22 @@ namespace AppVendas.Services
         {
             var produtos = new List<Produto>();
 
-            Add("Produto A");
-            Add("Produto B");
-            Add("Produto C");
-            Add("Produto D");
+            Add("Produto A", 1);
+            Add("Produto B", 2);
+            Add("Produto C", 3);
+            Add("Produto D", 4);
 
             return produtos;
 
-            void Add(string descricao)
+            void Add(string descricao, decimal valorUnitario)
             {
                 produtos.Add(new Produto
                 {
                     Id = ++id,
                     Descricao = descricao,
                     Unidade = "PC",
-                    Valor = 1m,
-                    ValorUnitario = 1m
+                    Valor = valorUnitario,
+                    ValorUnitario = valorUnitario
                 });
             }
         }

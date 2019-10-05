@@ -1,13 +1,11 @@
-﻿using AppVendas.Services;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
-using Xamarin.Forms;
 
-namespace AppVendas.ViewModels
+namespace AppVendas.ViewModels.Base
 {
-    public class BaseViewModel : INotifyPropertyChanged
+    public class BaseViewModel : ExtendedBindableObject, INotifyPropertyChanged
     {
         bool isBusy = false;
         public bool IsBusy
@@ -35,22 +33,5 @@ namespace AppVendas.ViewModels
             OnPropertyChanged(propertyName);
             return true;
         }
-
-        #region INotifyPropertyChanged
-        public event PropertyChangedEventHandler PropertyChanged;
-        protected void OnPropertyChanged([CallerMemberName] string propertyName = "")
-        {
-            var changed = PropertyChanged;
-            if (changed == null)
-                return;
-
-            changed.Invoke(this, new PropertyChangedEventArgs(propertyName));
-        }
-        #endregion
-    }
-
-    public class BaseViewModel<T> : BaseViewModel
-    {
-        public static IDataStore<T> DataStore = DependencyService.Get<IDataStore<T>>();
     }
 }

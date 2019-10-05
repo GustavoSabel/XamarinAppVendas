@@ -1,20 +1,26 @@
 ﻿using AppVendas.Models;
+using AppVendas.Services;
+using AppVendas.ViewModels.Base;
 using System;
 using System.Collections.ObjectModel;
 using System.Diagnostics;
 using System.Threading.Tasks;
+using System.Windows.Input;
 using Xamarin.Forms;
 
 namespace AppVendas.ViewModels
 {
-    public class ClientesViewModel : BaseViewModel<Cliente>
+    public class ClientesViewModel : BaseViewModel
     {
+        private readonly IDataStore<Cliente> _dataStoreClientes;
+
         public ObservableCollection<Cliente> Clientes { get; set; }
-        public Command LoadCommand { get; }
+        public ICommand LoadCommand { get; }
         public bool Loaded { get; private set; }
 
-        public ClientesViewModel()
+        public ClientesViewModel(IDataStore<Cliente> dataStoreClientes)
         {
+            _dataStoreClientes = dataStoreClientes;
             Clientes = new ObservableCollection<Cliente>();
             Title = "Clientes";
             LoadCommand = new Command(async () => await ExecuteLoadItemsCommand());
@@ -30,7 +36,7 @@ namespace AppVendas.ViewModels
             try
             {
                 Clientes.Clear();
-                var items = await DataStore.GetManyAsync();
+                var items = await _dataStoreClientes.GetManyAsync();
                 foreach (var item in items)
                 {
                     Clientes.Add(item);

@@ -3,32 +3,63 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:d="http://xamarin.com/schemas/2014/forms/design"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:local="clr-namespace:AppVendas.MarkupExtensions;assembly=AppVendas"
              mc:Ignorable="d"
              x:Class="AppVendas.Views.NovoPedidoPage">
     <ContentPage.Content>
-        <CollectionView ItemsSource="{Binding Produtos}" EmptyView="Nenhum produto encontrado para esse cliente">
-            <CollectionView.ItemTemplate>
-                <DataTemplate>
-                    <Grid Padding="{StaticResource PaddingGrid}">
-                        <Grid.RowDefinitions>
-                            <RowDefinition Height="Auto"/>
-                            <RowDefinition Height="Auto"/>
-                            <RowDefinition Height="*"/>
-                        </Grid.RowDefinitions>
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="Auto"/>
-                            <ColumnDefinition Width="Auto"/>
-                            <ColumnDefinition Width="Auto"/>
-                        </Grid.ColumnDefinitions>
-                        <Image Grid.RowSpan="3" Source="sem_foto.png"  />
-                        <Label Grid.Column="1" Grid.Row="0" Text="{Binding Descricao}"/>
-                        <Label Grid.Column="1" Grid.Row="1" Text="{Binding Unidade}"/>
-                        <Label Grid.Column="1" Grid.Row="2" Text="{Binding ValorUnitario}"/>
-                        <Entry Grid.Column="2" Grid.Row="0" Text="{Binding Quantidade, Mode=TwoWay}" Keyboard="Numeric"/>
-                        <Label Grid.Column="2" Grid.Row="1" Text="{Binding ValorTotal, Mode=OneWay}"/>
-                    </Grid>
-                </DataTemplate>
-            </CollectionView.ItemTemplate>
-        </CollectionView>
+        <StackLayout>
+            <CollectionView ItemsSource="{Binding Produtos}" EmptyView="Nenhum produto encontrado para esse cliente">
+                <CollectionView.ItemTemplate>
+                    <DataTemplate>
+                        <Grid Padding="{StaticResource PaddingGrid}">
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="*"/>
+                            </Grid.RowDefinitions>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="Auto"/>
+                                <ColumnDefinition Width="*"/>
+                            </Grid.ColumnDefinitions>
+
+                            <Image Grid.Column="0" Grid.RowSpan="2" Source="sem_foto.png" />
+
+                            <Label Grid.Column="1" Text="{Binding Descricao}" FontSize="Large"/>
+
+                            <StackLayout Grid.Row="1" Grid.Column="1" Orientation="Horizontal">
+                            
+                                <StackLayout Orientation="Vertical">
+                                    <Label Text="{Binding Unidade}"/>
+                                    <Label Text="{Binding ValorUnitario, StringFormat='Valor Unit.: {0:c2}'}"/>
+                                    <Label Text="{Binding ValorTotal, Mode=OneWay, StringFormat='Total: {0:c2}'}"/>
+                                </StackLayout>
+                            
+                                <StackLayout Orientation="Vertical">
+                                    <ImageButton 
+                                        Source="{local:ImageResource Source='AppVendas.Resources.plus_64.png'}" 
+                                        Command="{Binding AdicionarUmCommand}" 
+                                        BindingContext="{Binding .}"
+                                        CommandParameter="{Binding .}"
+                                        BackgroundColor="Transparent"/>
+
+                                    <Entry 
+                                        Text="{Binding Quantidade, Mode=TwoWay}" 
+                                        Keyboard="Numeric" 
+                                        WidthRequest="50" />
+                                
+                                    <ImageButton 
+                                        Source="{local:ImageResource Source='AppVendas.Resources.minus_64.png'}" 
+                                        Command="{Binding RemoverUmCommand}"
+                                        BackgroundColor="Transparent"/>
+                                </StackLayout>
+                            
+                            </StackLayout>
+                        
+                        </Grid>
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
+            </CollectionView>
+
+            <Label Text="{Binding ValorTotal, StringFormat='Valor total: {0:c2}'}" />
+        </StackLayout>
     </ContentPage.Content>
 </ContentPage>

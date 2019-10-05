@@ -1,4 +1,6 @@
-﻿namespace AppVendas.Models
+﻿using AppVendas.Models.Base;
+
+namespace AppVendas.Models
 {
     public class Produto : IEntidade
     {
