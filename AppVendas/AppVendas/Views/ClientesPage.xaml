@@ -32,15 +32,18 @@
                                 <RowDefinition Height="Auto" />
                             </Grid.RowDefinitions>
                             <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*" />
                                 <ColumnDefinition Width="Auto" />
                             </Grid.ColumnDefinitions>
 
-                            <StackLayout Orientation="Horizontal" Grid.Row="0">
-                                <Label Text="{Binding NomeFantasia}" FontAttributes="Bold" FontSize="Medium" HorizontalOptions="Fill"/>
-                                <Label Text="{Binding CidadeEstado}" HorizontalOptions="End" VerticalOptions="End"/>
-                            </StackLayout>
-                            <StackLayout Orientation="Horizontal" Grid.Row="1">
+                            <Label Grid.Column="0" Text="{Binding NomeFantasia}" FontAttributes="Bold" FontSize="Medium"/>
+
+                            <StackLayout Grid.Row="1" Grid.ColumnSpan="2" Orientation="Horizontal">
                                 <Label Text="{Binding RazaoSocial}" />
+                            </StackLayout>
+                            
+                            <StackLayout Grid.Row="2" Grid.ColumnSpan="2" Orientation="Horizontal">
+                                <Label Grid.Row="2" Grid.ColumnSpan="2" Text="{Binding CidadeEstado}" VerticalOptions="End"/>
                                 <Label 
                                     IsVisible="{Binding DataUltimoPedido, Converter={StaticResource IsNotNull}}"
                                     Text="{Binding DataUltimoPedido, Converter={StaticResource DateTimeToString}, StringFormat='(Último ped.: {0})'}" 

@@ -19,7 +19,7 @@ namespace AppVendas.Services
             Add("Adankundîr", "Adankundîr", new DateTime(2019, 05, 18), "Blumenau", "SC");
             Add("Padaria Do João", "Padaria do João", null, "Gaspar", "SC");
             Add("Julio Tiago da Silvao", null, null, "São Paulo", "SP");
-            Add("Pedro de Alcântara Francisco Antônio João Carlos Xavier", "Pedro de Alcântara Francisco", null, "Jijoca de Jericoacoara", "CE");
+            Add("Pedro de Alcântara Francisco Antônio João Carlos Xavier", "Pedro de Alcântara Francisco Antônio João Carlos", null, "Jijoca de Jericoacoara", "CE");
 
             return clientes;
 

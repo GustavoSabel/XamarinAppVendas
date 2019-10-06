@@ -36,7 +36,7 @@ namespace AppVendas.ViewModels
         {
             if (string.IsNullOrEmpty(fitro))
                 Clientes = _todosClientes.ToList();
-            Clientes = _todosClientes.Where(x => x.RazaoSocial.Contains(fitro, StringComparison.InvariantCultureIgnoreCase)).ToList();
+            Clientes = _todosClientes.Where(x => x.RazaoSocial.Contains(fitro, StringComparison.InvariantCultureIgnoreCase) || x.NomeFantasia.Contains(fitro, StringComparison.InvariantCultureIgnoreCase)).ToList();
         });
 
         public ClientesViewModel(IDataStore<Cliente> dataStoreClientes)
