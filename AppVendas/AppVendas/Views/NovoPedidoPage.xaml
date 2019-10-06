@@ -4,8 +4,16 @@
              xmlns:d="http://xamarin.com/schemas/2014/forms/design"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:local="clr-namespace:AppVendas.MarkupExtensions;assembly=AppVendas"
+             xmlns:local1="clr-namespace:AppVendas.Converters"
              mc:Ignorable="d"
              x:Class="AppVendas.Views.NovoPedidoPage">
+    
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <local1:IsNotEmptyConverter x:Key="IsNotEmpty" />
+        </ResourceDictionary>
+    </ContentPage.Resources>
+    
     <ContentPage.Content>
         <StackLayout>
 
@@ -24,40 +32,43 @@
                                 <ColumnDefinition Width="*"/>
                             </Grid.ColumnDefinitions>
 
-                            <Label Grid.ColumnSpan="2" Text="{Binding Descricao}" FontSize="Large"/>
+                            <Label Grid.ColumnSpan="2" Text="{Binding Descricao}" FontSize="Medium" FontAttributes="Bold"/>
                             
-                            <Image Grid.Column="0" Grid.Row="1" Source="sem_foto.png" />
+                            <Image Grid.Column="0" Grid.Row="1" Source="sem_foto.png" WidthRequest="100" />
 
 
                             <StackLayout Grid.Row="1" Grid.Column="1" Orientation="Horizontal">
 
-                                <StackLayout Orientation="Vertical">
+                                <StackLayout Orientation="Vertical" HorizontalOptions="FillAndExpand">
                                     <Label Text="{Binding Unidade}"/>
                                     <Label Text="{Binding Valor, StringFormat='Valor: {0:c2}'}"/>
                                     <Label Text="{Binding ValorUnitario, StringFormat='Valor Unit.: {0:c2}'}"/>
-                                    <Label Text="{Binding ValorTotal, Mode=OneWay, StringFormat='Total: {0:c2}'}"/>
-                                </StackLayout>
+                                    <Label Text="{Binding ValorTotal, Mode=OneWay, StringFormat='Total: {0:c2}'}" FontSize="Medium"/>
+                                </StackLayout> 
 
-                                <StackLayout Orientation="Vertical">
-                                    <ImageButton 
-                                        Source="{local:ImageResource Source='AppVendas.Resources.plus_64.png'}" 
-                                        Command="{Binding AdicionarUmCommand}" 
-                                        WidthRequest="70"
-                                        HeightRequest="40"
-                                        BackgroundColor="Transparent"
-                                        />
-
+                                <StackLayout Orientation="Vertical" WidthRequest="80">
+                                    <StackLayout Orientation="Horizontal" HorizontalOptions="End">
+                                        <ImageButton 
+                                            Source="{local:ImageResource Source='AppVendas.Resources.minus_64.png'}" 
+                                            Command="{Binding RemoverUmCommand}"
+                                            WidthRequest="40"
+                                            HeightRequest="30"
+                                            IsVisible="{Binding Quantidade, Converter={StaticResource IsNotEmpty}}}"
+                                            BackgroundColor="Transparent"/>
+                                    
+                                        <ImageButton 
+                                            Source="{local:ImageResource Source='AppVendas.Resources.plus_64.png'}" 
+                                            Command="{Binding AdicionarUmCommand}" 
+                                            WidthRequest="40"
+                                            HeightRequest="30"
+                                            BackgroundColor="Transparent"
+                                            />
+                                    </StackLayout>
                                     <Entry 
                                         Text="{Binding Quantidade, Mode=TwoWay}" 
                                         Keyboard="Numeric" 
                                         WidthRequest="50" />
 
-                                    <ImageButton 
-                                        Source="{local:ImageResource Source='AppVendas.Resources.minus_64.png'}" 
-                                        Command="{Binding RemoverUmCommand}"
-                                        WidthRequest="70"
-                                        HeightRequest="40"
-                                        BackgroundColor="Transparent"/>
                                 </StackLayout>
 
                             </StackLayout>
@@ -66,8 +77,8 @@
                     </DataTemplate>
                 </CollectionView.ItemTemplate>
             </CollectionView>
-            
-            <StackLayout Orientation="Horizontal" HorizontalOptions="End">
+
+            <StackLayout Orientation="Horizontal" HorizontalOptions="End" >
                 <Label Text="{Binding ValorTotal, StringFormat='Valor total: {0:c2}'}" FontSize="Large" FontAttributes="Bold"  />
                 <ImageButton 
                     Source="{local:ImageResource Source='AppVendas.Resources.shopping_cart_64.png'}"

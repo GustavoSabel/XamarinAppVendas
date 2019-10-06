@@ -42,7 +42,6 @@ namespace AppVendas.ViewModels
         public ClientesViewModel(IDataStore<Cliente> dataStoreClientes)
         {
             _dataStoreClientes = dataStoreClientes;
-            Clientes = new ObservableCollection<Cliente>();
             Title = "Clientes";
             LoadCommand = new Command(async () => await ExecuteLoadItemsCommand());
         }

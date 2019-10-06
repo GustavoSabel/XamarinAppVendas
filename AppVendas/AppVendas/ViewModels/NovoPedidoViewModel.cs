@@ -34,7 +34,7 @@ namespace AppVendas.ViewModels
             Produtos = _todosProdutos.Where(x => x.Descricao.Contains(fitro, StringComparison.InvariantCultureIgnoreCase)).ToList();
         });
 
-        public decimal ValorTotal => Produtos.Sum(x => x.ValorTotal);
+        public decimal ValorTotal => _todosProdutos?.Sum(x => x.ValorTotal) ?? 0;
 
         public bool Loaded { get; private set; }
 
@@ -43,7 +43,6 @@ namespace AppVendas.ViewModels
         public NovoPedidoViewModel(IDataStoreProdutos dataStoreProdutos, int clienteId)
         {
             _dataStoreProdutos = dataStoreProdutos;
-            Produtos = new List<ProdutoViewModel>();
             LoadCommand = new Command(async () => await ExecuteLoadItemsCommand(clienteId));
         }
 
