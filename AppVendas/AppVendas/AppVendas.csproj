@@ -12,15 +12,15 @@
   <ItemGroup>
     <None Remove="Resources\minus_16.png" />
     <None Remove="Resources\minus_64.png" />
-    <None Remove="Resources\plus_16.png" />
     <None Remove="Resources\plus_24.png" />
-    <None Remove="Resources\plus_32.png" />
     <None Remove="Resources\plus_64.png" />
+    <None Remove="Resources\shopping_cart_64.png" />
   </ItemGroup>
 
   <ItemGroup>
     <EmbeddedResource Include="Resources\minus_64.png" />
     <EmbeddedResource Include="Resources\plus_64.png" />
+    <EmbeddedResource Include="Resources\shopping_cart_64.png" />
   </ItemGroup>
 
   <ItemGroup>

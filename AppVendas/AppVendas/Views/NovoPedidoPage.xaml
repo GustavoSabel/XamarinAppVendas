@@ -8,9 +8,15 @@
              x:Class="AppVendas.Views.NovoPedidoPage">
     <ContentPage.Content>
         <StackLayout>
-            <Label Text="{Binding ValorTotal, StringFormat='Valor total: {0:c2}'}" FontSize="Large" FontAttributes="Bold"  />
-            
-            <CollectionView ItemsSource="{Binding Produtos}" EmptyView="Nenhum produto encontrado para esse cliente">
+
+            <SearchBar 
+                x:Name="searchBar" 
+                Placeholder="Filtro"
+                TextChanged="searchBar_TextChanged"
+                >
+            </SearchBar>
+
+                <CollectionView ItemsSource="{Binding Produtos}" EmptyView="Nenhum produto encontrado">
                 <CollectionView.ItemTemplate>
                     <DataTemplate>
                         <Grid Padding="{StaticResource PaddingGrid}">
@@ -23,14 +29,16 @@
                                 <ColumnDefinition Width="*"/>
                             </Grid.ColumnDefinitions>
 
-                            <Image Grid.Column="0" Grid.RowSpan="2" Source="sem_foto.png" />
+                            <Label Grid.ColumnSpan="2" Text="{Binding Descricao}" FontSize="Large"/>
+                            
+                            <Image Grid.Column="0" Grid.Row="1" Source="sem_foto.png" />
 
-                            <Label Grid.Column="1" Text="{Binding Descricao}" FontSize="Large"/>
 
                             <StackLayout Grid.Row="1" Grid.Column="1" Orientation="Horizontal">
 
                                 <StackLayout Orientation="Vertical">
                                     <Label Text="{Binding Unidade}"/>
+                                    <Label Text="{Binding Valor, StringFormat='Valor: {0:c2}'}"/>
                                     <Label Text="{Binding ValorUnitario, StringFormat='Valor Unit.: {0:c2}'}"/>
                                     <Label Text="{Binding ValorTotal, Mode=OneWay, StringFormat='Total: {0:c2}'}"/>
                                 </StackLayout>
@@ -39,9 +47,10 @@
                                     <ImageButton 
                                         Source="{local:ImageResource Source='AppVendas.Resources.plus_64.png'}" 
                                         Command="{Binding AdicionarUmCommand}" 
-                                        BindingContext="{Binding .}"
-                                        CommandParameter="{Binding .}"
-                                        BackgroundColor="Transparent"/>
+                                        WidthRequest="70"
+                                        HeightRequest="40"
+                                        BackgroundColor="Transparent"
+                                        />
 
                                     <Entry 
                                         Text="{Binding Quantidade, Mode=TwoWay}" 
@@ -51,6 +60,8 @@
                                     <ImageButton 
                                         Source="{local:ImageResource Source='AppVendas.Resources.minus_64.png'}" 
                                         Command="{Binding RemoverUmCommand}"
+                                        WidthRequest="70"
+                                        HeightRequest="40"
                                         BackgroundColor="Transparent"/>
                                 </StackLayout>
 
@@ -60,6 +71,17 @@
                     </DataTemplate>
                 </CollectionView.ItemTemplate>
             </CollectionView>
+            
+            <StackLayout Orientation="Horizontal" HorizontalOptions="End">
+                <Label Text="{Binding ValorTotal, StringFormat='Valor total: {0:c2}'}" FontSize="Large" FontAttributes="Bold"  />
+                <ImageButton 
+                    Source="{local:ImageResource Source='AppVendas.Resources.shopping_cart_64.png'}"
+                    WidthRequest="70"
+                    HeightRequest="40"
+                    BackgroundColor="Transparent"
+                    />
+            </StackLayout>
+            
         </StackLayout>
     </ContentPage.Content>
 </ContentPage>

@@ -12,21 +12,22 @@ namespace AppVendas.Services
         {
             var produtos = new List<Produto>();
 
-            Add("Produto A", 1);
-            Add("Produto B", 2);
-            Add("Produto C", 3);
-            Add("Produto D", 4);
+            Add("Beterraba em conserva 12x500g Danimar", "CX12", 5.83m, 70);
+            Add("Brocolis em conserva 15x300g Danimar B", "CX15", 5.33m, 80);
+            Add("Cenoura em conserva 15x300g Danimar", "CX15", 5.33m, 80);
+            Add("Mini salsichas em conserva 12x180g DANIMAR", "CX12", 6.46m, 77.50m);
+            Add("Ovos de codorna em conserva 15x300 DANIMAR", "CX15", 6.87m, 103);
 
             return produtos;
 
-            void Add(string descricao, decimal valorUnitario)
+            void Add(string descricao, string unidade, decimal valorUnitario, decimal valor)
             {
                 produtos.Add(new Produto
                 {
                     Id = ++id,
                     Descricao = descricao,
-                    Unidade = "PC",
-                    Valor = valorUnitario,
+                    Unidade = unidade,
+                    Valor = valor,
                     ValorUnitario = valorUnitario
                 });
             }
@@ -36,7 +37,7 @@ namespace AppVendas.Services
         {
             var produtos = await GetManyAsync();
             if (clienteId == 1)
-                return produtos.Take(3);
+                return produtos.ToList();
             if (clienteId == 2)
                 return produtos.Skip(3);
             else

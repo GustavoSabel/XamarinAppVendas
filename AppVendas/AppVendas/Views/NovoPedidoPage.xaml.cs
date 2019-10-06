@@ -27,5 +27,10 @@ namespace AppVendas.Views
                 viewModel.LoadCommand.Execute(null);
             }
         }
+
+        private void searchBar_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            viewModel.FiltroCommand.Execute(e.NewTextValue);
+        }
     }
 }

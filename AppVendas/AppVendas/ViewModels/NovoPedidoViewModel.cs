@@ -2,7 +2,7 @@
 using AppVendas.Services;
 using AppVendas.ViewModels.Base;
 using System;
-using System.Collections.ObjectModel;
+using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
 using System.Threading.Tasks;
@@ -14,8 +14,25 @@ namespace AppVendas.ViewModels
     public class NovoPedidoViewModel : BaseViewModel
     {
         private readonly IDataStoreProdutos _dataStoreProdutos;
+        private IReadOnlyList<ProdutoViewModel> _todosProdutos;
+        private IReadOnlyList<ProdutoViewModel> produtos;
 
-        public ObservableCollection<ProdutoViewModel> Produtos { get; set; }
+        public IReadOnlyList<ProdutoViewModel> Produtos
+        {
+            get => produtos;
+            set
+            {
+                produtos = value;
+                OnPropertyChanged();
+            }
+        }
+
+        public Command<string> FiltroCommand => new Command<string>((fitro) =>
+        {
+            if (string.IsNullOrEmpty(fitro))
+                Produtos = _todosProdutos.ToList();
+            Produtos = _todosProdutos.Where(x => x.Descricao.Contains(fitro, StringComparison.InvariantCultureIgnoreCase)).ToList();
+        });
 
         public decimal ValorTotal => Produtos.Sum(x => x.ValorTotal);
 
@@ -26,7 +43,7 @@ namespace AppVendas.ViewModels
         public NovoPedidoViewModel(IDataStoreProdutos dataStoreProdutos, int clienteId)
         {
             _dataStoreProdutos = dataStoreProdutos;
-            Produtos = new ObservableCollection<ProdutoViewModel>();
+            Produtos = new List<ProdutoViewModel>();
             LoadCommand = new Command(async () => await ExecuteLoadItemsCommand(clienteId));
         }
 
@@ -39,17 +56,9 @@ namespace AppVendas.ViewModels
 
             try
             {
-                Produtos.Clear();
                 var items = await _dataStoreProdutos.ObterPorCliente(clienteId);
-                foreach (var item in items)
-                {
-                    var produtoVM = new ProdutoViewModel(item);
-                    Produtos.Add(produtoVM);
-                    produtoVM.PropertyChanged += (sender, e) =>
-                    {
-                        OnPropertyChanged(nameof(ValorTotal));
-                    };
-                }
+                _todosProdutos = ConverterParaViewModel(items);
+                Produtos = _todosProdutos.ToList();
                 Loaded = true;
             }
             catch (Exception ex)
@@ -60,6 +69,21 @@ namespace AppVendas.ViewModels
             {
                 IsBusy = false;
             }
+        }
+
+        private List<ProdutoViewModel> ConverterParaViewModel(IEnumerable<Produto> items)
+        {
+            var produtos = new List<ProdutoViewModel>();
+            foreach (var item in items)
+            {
+                var produtoVM = new ProdutoViewModel(item);
+                produtoVM.PropertyChanged += (sender, e) =>
+                {
+                    OnPropertyChanged(nameof(ValorTotal));
+                };
+                produtos.Add(produtoVM);
+            }
+            return produtos;
         }
 
         public class ProdutoViewModel : BaseViewModel
