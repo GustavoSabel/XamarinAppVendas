@@ -37,9 +37,9 @@ namespace AppVendas.Views
 
         private void Entry_Unfocused(object sender, FocusEventArgs e)
         {
-            var entry = (Entry)sender;
-            if (string.IsNullOrWhiteSpace(entry.Text))
-                entry.Text = "0";
+            //var entry = (Entry)sender;
+            //if (string.IsNullOrWhiteSpace(entry.Text))
+            //    entry.Text = "0";
         }
     }
 }
