@@ -33,5 +33,10 @@ namespace AppVendas.Views
             var cliente = (Cliente)tappedEventArgs.Parameter;
             Navigation.PushAsync(new NovoPedidoPage(cliente));
         }
+
+        private void SearchBar_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            viewModel.FiltroCommand.Execute(e.NewTextValue);
+        }
     }
 }

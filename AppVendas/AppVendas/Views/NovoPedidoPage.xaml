@@ -9,14 +9,9 @@
     <ContentPage.Content>
         <StackLayout>
 
-            <SearchBar 
-                x:Name="searchBar" 
-                Placeholder="Filtro"
-                TextChanged="searchBar_TextChanged"
-                >
-            </SearchBar>
+            <SearchBar Placeholder="Filtro" TextChanged="searchBar_TextChanged"/>
 
-                <CollectionView ItemsSource="{Binding Produtos}" EmptyView="Nenhum produto encontrado">
+            <CollectionView ItemsSource="{Binding Produtos}" EmptyView="Nenhum produto encontrado">
                 <CollectionView.ItemTemplate>
                     <DataTemplate>
                         <Grid Padding="{StaticResource PaddingGrid}">

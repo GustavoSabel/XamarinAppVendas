@@ -2,8 +2,10 @@
 using AppVendas.Services;
 using AppVendas.ViewModels.Base;
 using System;
+using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Diagnostics;
+using System.Linq;
 using System.Threading.Tasks;
 using System.Windows.Input;
 using Xamarin.Forms;
@@ -14,9 +16,28 @@ namespace AppVendas.ViewModels
     {
         private readonly IDataStore<Cliente> _dataStoreClientes;
 
-        public ObservableCollection<Cliente> Clientes { get; set; }
+        public IReadOnlyList<Cliente> Clientes
+        {
+            get => clientes;
+            set
+            {
+                clientes = value; 
+                OnPropertyChanged();
+            }
+        }
         public ICommand LoadCommand { get; }
+
+        private IReadOnlyList<Cliente> _todosClientes;
+        private IReadOnlyList<Cliente> clientes;
+
         public bool Loaded { get; private set; }
+
+        public Command<string> FiltroCommand => new Command<string>((fitro) =>
+        {
+            if (string.IsNullOrEmpty(fitro))
+                Clientes = _todosClientes.ToList();
+            Clientes = _todosClientes.Where(x => x.RazaoSocial.Contains(fitro, StringComparison.InvariantCultureIgnoreCase)).ToList();
+        });
 
         public ClientesViewModel(IDataStore<Cliente> dataStoreClientes)
         {
@@ -35,12 +56,10 @@ namespace AppVendas.ViewModels
 
             try
             {
-                Clientes.Clear();
                 var items = await _dataStoreClientes.GetManyAsync();
-                foreach (var item in items)
-                {
-                    Clientes.Add(item);
-                }
+                _todosClientes = ConverterEmViewModel(items);
+                Clientes = _todosClientes.ToList();
+
                 Loaded = true;
             }
             catch (Exception ex)
@@ -51,6 +70,17 @@ namespace AppVendas.ViewModels
             {
                 IsBusy = false;
             }
+        }
+
+        private static List<Cliente> ConverterEmViewModel(IEnumerable<Cliente> items)
+        {
+            var clientesVM = new List<Cliente>();
+            foreach (var item in items)
+            {
+                clientesVM.Add(item);
+            }
+
+            return clientesVM;
         }
     }
 }
