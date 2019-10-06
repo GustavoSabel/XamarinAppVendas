@@ -34,5 +34,12 @@ namespace AppVendas.Views
         {
             viewModel.FiltroCommand.Execute(e.NewTextValue);
         }
+
+        private void Entry_Unfocused(object sender, FocusEventArgs e)
+        {
+            var entry = (Entry)sender;
+            if (string.IsNullOrWhiteSpace(entry.Text))
+                entry.Text = "0";
+        }
     }
 }
