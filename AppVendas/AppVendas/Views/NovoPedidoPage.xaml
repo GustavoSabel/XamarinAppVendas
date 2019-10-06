@@ -47,6 +47,12 @@
                                 </StackLayout> 
 
                                 <StackLayout Orientation="Vertical" WidthRequest="80">
+                                    <Entry 
+                                        Text="{Binding Quantidade, Mode=TwoWay}" 
+                                        Keyboard="Numeric" 
+                                        Unfocused="Entry_Unfocused"
+                                        WidthRequest="50" />
+
                                     <StackLayout Orientation="Horizontal" HorizontalOptions="End">
                                         <ImageButton 
                                             Source="{local:ImageResource Source='AppVendas.Resources.minus_64.png'}" 
@@ -64,10 +70,6 @@
                                             BackgroundColor="Transparent"
                                             />
                                     </StackLayout>
-                                    <Entry 
-                                        Text="{Binding Quantidade, Mode=TwoWay}" 
-                                        Keyboard="Numeric" 
-                                        WidthRequest="50" />
 
                                 </StackLayout>
 
