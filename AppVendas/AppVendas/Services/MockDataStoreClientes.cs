@@ -1,4 +1,5 @@
 ﻿using AppVendas.Models;
+using AppVendas.Services.Base;
 using System;
 using System.Collections.Generic;
 

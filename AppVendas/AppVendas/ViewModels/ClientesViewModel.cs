@@ -1,5 +1,5 @@
 ﻿using AppVendas.Models;
-using AppVendas.Services;
+using AppVendas.Services.Base;
 using AppVendas.ViewModels.Base;
 using System;
 using System.Collections.Generic;

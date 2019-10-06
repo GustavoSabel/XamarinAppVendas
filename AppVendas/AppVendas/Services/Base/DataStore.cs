@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace AppVendas.Services
+namespace AppVendas.Services.Base
 {
     public abstract class DataStore<T> : IDataStore<T> where T : IEntidade
     {

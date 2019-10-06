@@ -1,5 +1,5 @@
 ﻿using AppVendas.Models;
-using AppVendas.Services;
+using AppVendas.Services.Base;
 using AppVendas.ViewModels;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
@@ -11,10 +11,10 @@ namespace AppVendas.Views
     {
         private readonly ClientesViewModel viewModel;
 
-        public ClientesPage(IDataStore<Cliente> dataStoreCliente)
+        public ClientesPage()
         {
             InitializeComponent();
-            BindingContext = viewModel = new ClientesViewModel(dataStoreCliente);
+            BindingContext = viewModel = new ClientesViewModel(DependencyService.Get<IDataStore<Cliente>>());
         }
 
         protected override void OnAppearing()

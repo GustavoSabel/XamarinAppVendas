@@ -1,4 +1,5 @@
 ﻿using AppVendas.Models;
+using AppVendas.Services.Base;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;

@@ -1,8 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Threading.Tasks;
 
-namespace AppVendas.Services
+namespace AppVendas.Services.Base
 {
     public interface IDataStore<T>
     {

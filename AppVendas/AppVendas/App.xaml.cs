@@ -1,5 +1,4 @@
-﻿using AppVendas.Models;
-using AppVendas.Services;
+﻿using AppVendas.Services;
 using AppVendas.Views;
 using System.Globalization;
 using Xamarin.Forms;
@@ -18,7 +17,7 @@ namespace AppVendas
             DependencyService.Register<MockDataStoreClientes>();
             DependencyService.Register<MockDataStoreProdutos>();
 
-            MainPage = new NavigationPage(new ClientesPage(DependencyService.Resolve<IDataStore<Cliente>>()));
+            MainPage = new AppShell();
         }
 
         protected override void OnStart()
