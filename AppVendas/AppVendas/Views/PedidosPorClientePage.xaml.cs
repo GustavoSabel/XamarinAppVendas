@@ -26,5 +26,12 @@ namespace AppVendas.Views
             if (!viewModel.Loaded)
                 await viewModel.Carregar(_cliente);
         }
+
+        private async void TapGestureRecognizer_Tapped(object sender, System.EventArgs e)
+        {
+            var tappedEventArgs = (TappedEventArgs)e;
+            var pedido = (Pedido)tappedEventArgs.Parameter;
+            await Navigation.PushAsync(new PedidoPage(pedido.Id));
+        }
     }
 }

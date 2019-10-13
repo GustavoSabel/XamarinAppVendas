@@ -32,6 +32,9 @@
     <Compile Update="Views\CarrinhoPage.xaml.cs">
       <DependentUpon>CarrinhoPage.xaml</DependentUpon>
     </Compile>
+    <Compile Update="Views\PedidoPage.xaml.cs">
+      <DependentUpon>PedidoPage.xaml</DependentUpon>
+    </Compile>
     <Compile Update="Views\NovoPedidoPage.xaml.cs">
       <DependentUpon>NovoPedidoPage.xaml</DependentUpon>
     </Compile>

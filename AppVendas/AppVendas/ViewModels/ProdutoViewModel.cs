@@ -4,52 +4,61 @@ using Xamarin.Forms;
 
 namespace AppVendas.ViewModels
 {
-    public partial class NovoPedidoViewModel
+    public class ProdutoViewModel : BaseViewModel
     {
-        public class ProdutoViewModel : BaseViewModel
+        private decimal quantidade;
+
+        public Command AdicionarUmCommand => new Command(AdicionarUm);
+
+        public Command RemoverUmCommand => new Command(SubtrairUm);
+
+        public ProdutoViewModel(Produto produto)
         {
-            private readonly Produto _produto;
-            private decimal quantidade;
+            Id = produto.Id;
+            Descricao = produto.Descricao;
+            Unidade = produto.Unidade;
+            Valor = produto.Valor;
+            ValorUnitario = produto.ValorUnitario;
+        }
 
-            public Command AdicionarUmCommand => new Command(AdicionarUm);
+        public ProdutoViewModel(ProdutoPedido produto)
+        {
+            Id = produto.ProdutoId;
+            Descricao = produto.Descricao;
+            Unidade = produto.Unidade;
+            Valor = produto.Valor;
+            ValorUnitario = produto.ValorUnitario;
+        }
 
-            public Command RemoverUmCommand => new Command(SubtrairUm);
+        public int Id { get; private set; }
+        public string Descricao { get; private set; }
+        public string Unidade { get; private set; }
+        public decimal Valor { get; private set; }
+        public decimal ValorUnitario { get; private set; }
 
-            public ProdutoViewModel(Produto produto)
+        public decimal Quantidade
+        {
+            get => quantidade;
+            set
             {
-                _produto = produto;
-            }
-
-            public int Id => _produto.Id;
-            public string Descricao => _produto.Descricao;
-            public string Unidade => _produto.Unidade;
-            public decimal Valor => _produto.Valor;
-            public decimal ValorUnitario => _produto.ValorUnitario;
-
-            public decimal Quantidade
-            {
-                get => quantidade;
-                set
+                if (SetProperty(ref quantidade, value))
                 {
-                    if (SetProperty(ref quantidade, value))
-                    {
-                        OnPropertyChanged(nameof(ValorTotal));
-                    }
+                    OnPropertyChanged(nameof(ValorTotal));
                 }
             }
-            public decimal ValorTotal => Valor * Quantidade;
+        }
+        public decimal ValorTotal => Valor * Quantidade;
 
-            private void AdicionarUm()
-            {
-                Quantidade++;
-            }
+        private void AdicionarUm()
+        {
+            Quantidade++;
+        }
 
-            private void SubtrairUm()
-            {
-                Quantidade--;
-                if (Quantidade <= 0)
-                    Quantidade = 0;
-            }
+        private void SubtrairUm()
+        {
+            Quantidade--;
+            if (Quantidade <= 0)
+                Quantidade = 0;
         }
     }
 }

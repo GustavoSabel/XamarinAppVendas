@@ -4,38 +4,36 @@
              xmlns:d="http://xamarin.com/schemas/2014/forms/design"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              mc:Ignorable="d"
-             x:Class="AppVendas.Views.PedidosPorClientePage"
+             x:Class="AppVendas.Views.PedidoPage"
              Title="{Binding Title}">
-     
     <ContentPage.Content>
-        <StackLayout>
+        <StackLayout Padding="{StaticResource PaddingGrid}">
+            <Label Text="{Binding ValorTotal}"/>
 
-            <Label Margin="{StaticResource PaddingGrid}" Text="{Binding ClienteNomeFantasia}" FontSize="Large" FontAttributes="Bold" />
-
-            <CollectionView ItemsSource="{Binding Pedidos}" EmptyView="Nada" SelectionMode="Single">
+            <CollectionView ItemsSource="{Binding Produtos}" EmptyView="Nada" SelectionMode="Single">
                 <CollectionView.ItemTemplate>
                     <DataTemplate>
                         <Grid Padding="{StaticResource PaddingGrid}">
-                            <Grid.GestureRecognizers>
-                                <TapGestureRecognizer Tapped="TapGestureRecognizer_Tapped"  CommandParameter="{Binding .}"/>
-                            </Grid.GestureRecognizers>
                             <Grid.RowDefinitions>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="Auto"/>
                                 <RowDefinition Height="Auto"/>
                             </Grid.RowDefinitions>
                             <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="*"/>
                                 <ColumnDefinition Width="Auto"/>
                             </Grid.ColumnDefinitions>
-                            <Label Grid.Row="0" Grid.Column="0" Text="{Binding Data}" FontSize="Medium" />
-                            <Label Grid.Row="0" Grid.Column="1" Text="{Binding ValorTotal, StringFormat='Total: {0:c2}'}" FontSize="Medium"  />
+                            <Label Grid.Row="0" Text="{Binding Descricao}" />
+                            <Label Grid.Row="1" Text="{Binding Quantidade}" />
+                            <Label Grid.Row="2" Text="{Binding Valor}" />
+                            <Label Grid.Row="3" Text="{Binding ValorUnitario}" />
+                            <Label Grid.Row="4" Text="{Binding ValorTotal}" />
                         </Grid>
                     </DataTemplate>
                 </CollectionView.ItemTemplate>
             </CollectionView>
-
-            <Label Margin="{StaticResource PaddingGrid}" Text="{Binding ValorTotal, StringFormat='Valor total: {0:c2}'}" FontSize="Large" FontAttributes="Bold" />
-                   
+            
         </StackLayout>
     </ContentPage.Content>
-    
 </ContentPage>
