@@ -6,7 +6,8 @@
              mc:Ignorable="d"
              xmlns:localMarkups="clr-namespace:AppVendas.MarkupExtensions;assembly=AppVendas"
              xmlns:localConverters="clr-namespace:AppVendas.Converters"
-             x:Class="AppVendas.Views.CarrinhoPage">
+             xmlns:localBehaviors="clr-namespace:AppVendas.Behaviors"
+            x:Class="AppVendas.Views.CarrinhoPage">
     
     <ContentPage.Resources>
         <ResourceDictionary>
@@ -47,7 +48,11 @@
                                     <Entry 
                                         Text="{Binding Quantidade, Mode=TwoWay}" 
                                         Keyboard="Numeric" 
-                                        WidthRequest="50" />
+                                        WidthRequest="50" >
+                                        <Entry.Behaviors>
+                                            <localBehaviors:NumberMaskedBehavior/>
+                                        </Entry.Behaviors>
+                                    </Entry>
 
                                     <StackLayout Orientation="Horizontal" HorizontalOptions="End">
                                         <ImageButton 
@@ -55,7 +60,7 @@
                                             Command="{Binding RemoverUmCommand}"
                                             WidthRequest="40"
                                             HeightRequest="30"
-                                            IsVisible="{Binding Quantidade, Converter={StaticResource IsNotEmpty}}}"
+                                            IsVisible="{Binding Quantidade, Converter={StaticResource IsNotEmpty}}"
                                             BackgroundColor="Transparent"/>
 
                                         <ImageButton 

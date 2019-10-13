@@ -9,7 +9,7 @@ namespace AppVendas.ViewModels
         public class ProdutoViewModel : BaseViewModel
         {
             private readonly Produto _produto;
-            private decimal? quantidade;
+            private decimal quantidade;
 
             public Command AdicionarUmCommand => new Command(AdicionarUm);
 
@@ -26,7 +26,7 @@ namespace AppVendas.ViewModels
             public decimal Valor => _produto.Valor;
             public decimal ValorUnitario => _produto.ValorUnitario;
 
-            public decimal? Quantidade
+            public decimal Quantidade
             {
                 get => quantidade;
                 set
@@ -37,12 +37,10 @@ namespace AppVendas.ViewModels
                     }
                 }
             }
-            public decimal ValorTotal => Quantidade.HasValue ? Valor * Quantidade.Value : 0;
+            public decimal ValorTotal => Valor * Quantidade;
 
             private void AdicionarUm()
             {
-                if (Quantidade == null)
-                    Quantidade = 0;
                 Quantidade++;
             }
 
@@ -50,7 +48,7 @@ namespace AppVendas.ViewModels
             {
                 Quantidade--;
                 if (Quantidade <= 0)
-                    Quantidade = null;
+                    Quantidade = 0;
             }
         }
     }

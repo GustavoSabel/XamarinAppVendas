@@ -2,10 +2,12 @@
 using Android.Content.PM;
 using Android.OS;
 using Android.Runtime;
+using AppVendas.Droid;
+using Xamarin.Forms;
 
 namespace AppVendas.Droid
 {
-    [Activity(Label = "Pedido de Venda", Icon = "@mipmap/ic_launcher", Theme = "@style/MainTheme",  ConfigurationChanges = ConfigChanges.ScreenSize | ConfigChanges.Orientation)]
+    [Activity(Label = "Pedido de Venda", Icon = "@mipmap/ic_launcher", Theme = "@style/MainTheme", ConfigurationChanges = ConfigChanges.ScreenSize | ConfigChanges.Orientation)]
     public class MainActivity : global::Xamarin.Forms.Platform.Android.FormsAppCompatActivity
     {
         protected override void OnCreate(Bundle savedInstanceState)

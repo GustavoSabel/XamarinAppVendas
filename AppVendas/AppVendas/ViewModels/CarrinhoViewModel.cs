@@ -22,7 +22,7 @@ namespace AppVendas.ViewModels
         {
             var produto = (ProdutoViewModel)sender;
             OnPropertyChanged(nameof(ValorTotal));
-            if (produto == null || produto.Quantidade <= 0)
+            if (produto.Quantidade <= 0)
                 OnPropertyChanged(nameof(ProdutosComQuantidade));
         }
 
