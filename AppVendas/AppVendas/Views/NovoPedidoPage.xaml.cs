@@ -30,16 +30,14 @@ namespace AppVendas.Views
             }
         }
 
-        private void searchBar_TextChanged(object sender, TextChangedEventArgs e)
+        private void SearchBar_TextChanged(object sender, TextChangedEventArgs e)
         {
             viewModel.FiltroCommand.Execute(e.NewTextValue);
         }
 
-        private void Entry_Unfocused(object sender, FocusEventArgs e)
+        private void BtnCarrinho_Clicked(object sender, System.EventArgs e)
         {
-            //var entry = (Entry)sender;
-            //if (string.IsNullOrWhiteSpace(entry.Text))
-            //    entry.Text = "0";
+            Navigation.PushAsync(new CarrinhoPage(viewModel.Produtos));
         }
     }
 }

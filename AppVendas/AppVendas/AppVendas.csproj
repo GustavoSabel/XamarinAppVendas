@@ -29,6 +29,9 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Compile Update="Views\CarrinhoPage.xaml.cs">
+      <DependentUpon>CarrinhoPage.xaml</DependentUpon>
+    </Compile>
     <Compile Update="Views\NovoPedidoPage.xaml.cs">
       <DependentUpon>NovoPedidoPage.xaml</DependentUpon>
     </Compile>
@@ -38,6 +41,9 @@
   </ItemGroup>
 
   <ItemGroup>
+    <EmbeddedResource Update="Views\CarrinhoPage.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
     <EmbeddedResource Update="Views\ClientesPage.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>

@@ -27,11 +27,11 @@ namespace AppVendas.Views
             }
         }
 
-        private void TapGestureRecognizer_Tapped(object sender, System.EventArgs e)
+        private async void TapGestureRecognizer_Tapped(object sender, System.EventArgs e)
         {
             var tappedEventArgs = (TappedEventArgs)e;
             var cliente = (Cliente)tappedEventArgs.Parameter;
-            Navigation.PushAsync(new NovoPedidoPage(cliente));
+            await Navigation.PushAsync(new NovoPedidoPage(cliente));
         }
 
         private void SearchBar_TextChanged(object sender, TextChangedEventArgs e)

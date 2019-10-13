@@ -41,7 +41,7 @@
                             <StackLayout Grid.Row="1" Grid.ColumnSpan="2" Orientation="Horizontal">
                                 <Label Text="{Binding RazaoSocial}" />
                             </StackLayout>
-                            
+
                             <StackLayout Grid.Row="2" Grid.ColumnSpan="2" Orientation="Horizontal">
                                 <Label Grid.Row="2" Grid.ColumnSpan="2" Text="{Binding CidadeEstado}" VerticalOptions="End"/>
                                 <Label 
