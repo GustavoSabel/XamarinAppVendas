@@ -1,5 +1,5 @@
 ﻿using AppVendas.Models;
-using AppVendas.Services.Base;
+using AppVendas.Services;
 using AppVendas.ViewModels;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
@@ -14,7 +14,7 @@ namespace AppVendas.Views
         public ClientesPage()
         {
             InitializeComponent();
-            BindingContext = viewModel = new ClientesViewModel(DependencyService.Get<IDataStore<Cliente>>());
+            BindingContext = viewModel = new ClientesViewModel(DependencyService.Get<IDataStoreClientes>());
         }
 
         protected override void OnAppearing()
@@ -31,7 +31,7 @@ namespace AppVendas.Views
         {
             var tappedEventArgs = (TappedEventArgs)e;
             var cliente = (Cliente)tappedEventArgs.Parameter;
-            await Navigation.PushAsync(new NovoPedidoPage(cliente));
+            await Navigation.PushAsync(new ClientePage(cliente));
         }
 
         private void SearchBar_TextChanged(object sender, TextChangedEventArgs e)

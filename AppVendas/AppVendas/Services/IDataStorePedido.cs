@@ -5,9 +5,8 @@ using AppVendas.Services.Base;
 
 namespace AppVendas.Services
 {
-
-    public interface IDataStoreProdutos : IDataStore<Produto>
+    public interface IDataStorePedido : IDataStore<Pedido>
     {
-        Task<IEnumerable<Produto>> ObterPorCliente(int clienteId);
+        Task<IEnumerable<Pedido>> ObterPorCliente(int clienteId);
     }
 }

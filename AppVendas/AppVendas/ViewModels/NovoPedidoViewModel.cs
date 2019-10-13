@@ -6,7 +6,6 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
 using System.Threading.Tasks;
-using System.Windows.Input;
 using Xamarin.Forms;
 
 namespace AppVendas.ViewModels
@@ -38,15 +37,13 @@ namespace AppVendas.ViewModels
 
         public bool Loaded { get; private set; }
 
-        public ICommand LoadCommand { get; }
-
-        public NovoPedidoViewModel(IDataStoreProdutos dataStoreProdutos, int clienteId)
+        public NovoPedidoViewModel(IDataStoreProdutos dataStoreProdutos)
         {
+            Title = "Novo pedido";
             _dataStoreProdutos = dataStoreProdutos;
-            LoadCommand = new Command(async () => await ExecuteLoadItemsCommand(clienteId));
         }
 
-        async Task ExecuteLoadItemsCommand(int clienteId)
+        public async Task Carregar(int clienteId)
         {
             if (IsBusy)
                 return;

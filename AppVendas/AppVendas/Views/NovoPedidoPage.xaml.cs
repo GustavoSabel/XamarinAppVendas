@@ -11,6 +11,7 @@ namespace AppVendas.Views
     public partial class NovoPedidoPage : ContentPage
     {
         private readonly NovoPedidoViewModel viewModel;
+        private readonly Cliente _cliente;
 
         public NovoPedidoPage(Cliente cliente)
         {
@@ -18,15 +19,16 @@ namespace AppVendas.Views
             Title = "Venda para " + cliente.NomeFantasia;
 
             var dataStore = DependencyService.Get<IDataStoreProdutos>();
-            BindingContext = viewModel = new NovoPedidoViewModel(dataStore, cliente.Id);
+            BindingContext = viewModel = new NovoPedidoViewModel(dataStore);
+            _cliente = cliente;
         }
 
-        protected override void OnAppearing()
+        protected async override void OnAppearing()
         {
             base.OnAppearing();
             if (!viewModel.Loaded)
             {
-                viewModel.LoadCommand.Execute(null);
+                await viewModel.Carregar(_cliente.Id);
             }
         }
 

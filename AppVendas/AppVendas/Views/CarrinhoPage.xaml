@@ -83,6 +83,7 @@
 
             <StackLayout Orientation="Horizontal" HorizontalOptions="End" >
                 <Label Text="{Binding ValorTotal, StringFormat='Valor total: {0:c2}'}" FontSize="Large" FontAttributes="Bold"  />
+                <Button Text="Finalizar" Clicked="BtnFinalizar_Clicked"/>
             </StackLayout>
 
         </StackLayout>

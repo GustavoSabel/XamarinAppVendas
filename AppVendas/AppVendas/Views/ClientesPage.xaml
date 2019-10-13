@@ -6,7 +6,7 @@
              xmlns:local="clr-namespace:AppVendas.Converters"
              mc:Ignorable="d"
              x:Class="AppVendas.Views.ClientesPage"
-             Title="Clientes">
+             Title="{Binding Title}">
 
     <ContentPage.Resources>
         <ResourceDictionary>
@@ -19,7 +19,7 @@
     <ContentPage.Content>
         <StackLayout>
             <SearchBar Placeholder="Filtro" TextChanged="SearchBar_TextChanged"/>
-            <CollectionView ItemsSource="{Binding Clientes}" EmptyView = "Nenhum cliente encontrado" >
+            <CollectionView ItemsSource="{Binding Clientes}" EmptyView = "Nenhum cliente encontrado" SelectionMode="Single">
                 <CollectionView.ItemTemplate>
                     <DataTemplate>
                         <Grid Padding="{StaticResource PaddingGrid}">
@@ -32,18 +32,17 @@
                                 <RowDefinition Height="Auto" />
                             </Grid.RowDefinitions>
                             <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="*" />
                                 <ColumnDefinition Width="Auto" />
                             </Grid.ColumnDefinitions>
 
                             <Label Grid.Column="0" Text="{Binding NomeFantasia}" FontAttributes="Bold" FontSize="Medium"/>
 
-                            <StackLayout Grid.Row="1" Grid.ColumnSpan="2" Orientation="Horizontal">
+                            <StackLayout Grid.Row="1" Orientation="Horizontal">
                                 <Label Text="{Binding RazaoSocial}" />
                             </StackLayout>
 
-                            <StackLayout Grid.Row="2" Grid.ColumnSpan="2" Orientation="Horizontal">
-                                <Label Grid.Row="2" Grid.ColumnSpan="2" Text="{Binding CidadeEstado}" VerticalOptions="End"/>
+                            <StackLayout Grid.Row="2" Orientation="Horizontal">
+                                <Label Grid.Row="2" Text="{Binding CidadeEstado}" VerticalOptions="End"/>
                                 <Label 
                                     IsVisible="{Binding DataUltimoPedido, Converter={StaticResource IsNotNull}}"
                                     Text="{Binding DataUltimoPedido, Converter={StaticResource DateTimeToString}, StringFormat='(Último ped.: {0})'}" 

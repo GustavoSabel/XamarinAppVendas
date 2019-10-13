@@ -5,7 +5,7 @@ using System.Collections.Generic;
 
 namespace AppVendas.Services
 {
-    public class MockDataStoreClientes : DataStore<Cliente>
+    public class MockDataStoreClientes : DataStore<Cliente>, IDataStoreClientes
     {
         static int id = 0;
 

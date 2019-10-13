@@ -1,4 +1,5 @@
 ﻿using AppVendas.Models;
+using AppVendas.Services;
 using AppVendas.Services.Base;
 using AppVendas.ViewModels.Base;
 using System;
@@ -13,7 +14,9 @@ namespace AppVendas.ViewModels
 {
     public class ClientesViewModel : BaseViewModel
     {
-        private readonly IDataStore<Cliente> _dataStoreClientes;
+        private readonly IDataStoreClientes _dataStoreClientes;
+        private IReadOnlyList<Cliente> _todosClientes;
+        private IReadOnlyList<Cliente> clientes;
 
         public IReadOnlyList<Cliente> Clientes
         {
@@ -26,9 +29,6 @@ namespace AppVendas.ViewModels
         }
         public ICommand LoadCommand { get; }
 
-        private IReadOnlyList<Cliente> _todosClientes;
-        private IReadOnlyList<Cliente> clientes;
-
         public bool Loaded { get; private set; }
 
         public Command<string> FiltroCommand => new Command<string>((fitro) =>
@@ -38,7 +38,7 @@ namespace AppVendas.ViewModels
             Clientes = _todosClientes.Where(x => x.RazaoSocial.Contains(fitro, StringComparison.InvariantCultureIgnoreCase) || x.NomeFantasia.Contains(fitro, StringComparison.InvariantCultureIgnoreCase)).ToList();
         });
 
-        public ClientesViewModel(IDataStore<Cliente> dataStoreClientes)
+        public ClientesViewModel(IDataStoreClientes dataStoreClientes)
         {
             _dataStoreClientes = dataStoreClientes;
             Title = "Clientes";

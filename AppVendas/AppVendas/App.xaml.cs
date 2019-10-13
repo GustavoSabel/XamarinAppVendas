@@ -16,6 +16,7 @@ namespace AppVendas
 
             DependencyService.Register<MockDataStoreClientes>();
             DependencyService.Register<MockDataStoreProdutos>();
+            DependencyService.Register<MockDataStorePedido>();
 
             MainPage = new AppShell();
         }

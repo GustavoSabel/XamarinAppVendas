@@ -1,0 +1,38 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             mc:Ignorable="d"
+             x:Class="AppVendas.Views.PedidosPorClientePage"
+             Title="{Binding Title}">
+     
+    <ContentPage.Content>
+        <StackLayout>
+
+            <Label Margin="{StaticResource PaddingGrid}" Text="{Binding ClienteNomeFantasia}" FontSize="Large" FontAttributes="Bold" />
+
+            <CollectionView ItemsSource="{Binding Pedidos}" EmptyView="Nada" SelectionMode="Single">
+                <CollectionView.ItemTemplate>
+                    <DataTemplate>
+                        <Grid Padding="{StaticResource PaddingGrid}">
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="Auto"/>
+                            </Grid.RowDefinitions>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="Auto"/>
+                            </Grid.ColumnDefinitions>
+                            <Label Grid.Row="0" Grid.Column="0" Text="{Binding Data}" FontSize="Medium" />
+                            <Label Grid.Row="0" Grid.Column="1" Text="{Binding ValorTotal, StringFormat='Total: {0:c2}'}" FontSize="Medium"  />
+                        </Grid>
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
+            </CollectionView>
+
+            <Label Margin="{StaticResource PaddingGrid}" Text="{Binding ValorTotal, StringFormat='Valor total: {0:c2}'}" FontSize="Large" FontAttributes="Bold" />
+                   
+        </StackLayout>
+    </ContentPage.Content>
+    
+</ContentPage>

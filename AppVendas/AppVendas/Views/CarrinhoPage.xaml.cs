@@ -18,5 +18,10 @@ namespace AppVendas.Views
             BindingContext = viewModel = new CarrinhoViewModel(produtos);
             Title = viewModel.Title;
         }
+
+        private void BtnFinalizar_Clicked(object sender, System.EventArgs e)
+        {
+
+        }
     }
 }
