@@ -19,6 +19,7 @@ namespace AppVendas.ViewModels
         public decimal ValorTotal { get; set; }
 
         public DateTime Data { get; set; }
+
         public bool Loaded { get; private set; }
 
         public PedidoViewModel(IDataStorePedido dataStorePedido, IDataStoreClientes dataStoreClientes)

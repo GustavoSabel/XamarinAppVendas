@@ -29,6 +29,26 @@ namespace AppVendas.Services
                             Valor = 70m,
                             ValorUnitario = 5.83m,
                             Quantidade = 10,
+                            ValorTotal = 500
+                        },
+                        new ProdutoPedido
+                        {
+                            ProdutoId = 2,
+                            Descricao = "Ovos de codorna em conserva 15x300 DANIMAR",
+                            Unidade = "CX12",
+                            Valor = 20m,
+                            ValorUnitario = 5.83m,
+                            Quantidade = 20,
+                            ValorTotal = 200
+                        },
+                        new ProdutoPedido
+                        {
+                            ProdutoId = 3,
+                            Descricao = "Beterraba em conserva 12x500g Danimar",
+                            Unidade = "CX15",
+                            Valor = 10m,
+                            ValorUnitario = 5.83m,
+                            Quantidade = 05,
                             ValorTotal = 700
                         }
                     }

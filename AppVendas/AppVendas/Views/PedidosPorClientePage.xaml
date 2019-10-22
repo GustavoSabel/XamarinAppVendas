@@ -10,12 +10,12 @@
     <ContentPage.Content>
         <StackLayout>
 
-            <Label Margin="{StaticResource PaddingGrid}" Text="{Binding ClienteNomeFantasia}" FontSize="Large" FontAttributes="Bold" />
+            <Label Margin="{StaticResource PaddingTela}" Text="{Binding ClienteNomeFantasia}" FontSize="Large" FontAttributes="Bold" />
 
             <CollectionView ItemsSource="{Binding Pedidos}" EmptyView="Nada" SelectionMode="Single">
                 <CollectionView.ItemTemplate>
                     <DataTemplate>
-                        <Grid Padding="{StaticResource PaddingGrid}">
+                        <Grid Padding="{StaticResource PaddingTela}">
                             <Grid.GestureRecognizers>
                                 <TapGestureRecognizer Tapped="TapGestureRecognizer_Tapped"  CommandParameter="{Binding .}"/>
                             </Grid.GestureRecognizers>
@@ -33,7 +33,7 @@
                 </CollectionView.ItemTemplate>
             </CollectionView>
 
-            <Label Margin="{StaticResource PaddingGrid}" Text="{Binding ValorTotal, StringFormat='Valor total: {0:c2}'}" FontSize="Large" FontAttributes="Bold" />
+            <Label Margin="{StaticResource PaddingTela}" Text="{Binding ValorTotal, StringFormat='Valor total: {0:c2}'}" FontSize="Large" FontAttributes="Bold" />
                    
         </StackLayout>
     </ContentPage.Content>

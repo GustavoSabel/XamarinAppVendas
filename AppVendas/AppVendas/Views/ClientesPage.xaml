@@ -22,7 +22,7 @@
             <CollectionView ItemsSource="{Binding Clientes}" EmptyView = "Nenhum cliente encontrado" SelectionMode="Single">
                 <CollectionView.ItemTemplate>
                     <DataTemplate>
-                        <Grid Padding="{StaticResource PaddingGrid}">
+                        <Grid Padding="{StaticResource PaddingTela}">
                             <Grid.GestureRecognizers>
                                 <TapGestureRecognizer Tapped="TapGestureRecognizer_Tapped" CommandParameter="{Binding .}"/>
                             </Grid.GestureRecognizers>

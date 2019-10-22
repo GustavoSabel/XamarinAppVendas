@@ -24,7 +24,7 @@
             <CollectionView ItemsSource="{Binding Produtos}" EmptyView="Nenhum produto encontrado">
                 <CollectionView.ItemTemplate>
                     <DataTemplate>
-                        <Grid Padding="{StaticResource PaddingGrid}">
+                        <Grid Padding="{StaticResource PaddingTela}">
                             <Grid.RowDefinitions>
                                 <RowDefinition Height="Auto"/>
                                 <RowDefinition Height="*"/>

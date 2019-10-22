@@ -20,7 +20,7 @@
             <CollectionView ItemsSource="{Binding ProdutosComQuantidade}" EmptyView="Nenhum produto adicionado ao carrinho">
                 <CollectionView.ItemTemplate>
                     <DataTemplate>
-                        <Grid Padding="{StaticResource PaddingGrid}">
+                        <Grid Padding="{StaticResource PaddingTela}">
                             <Grid.RowDefinitions>
                                 <RowDefinition Height="Auto"/>
                                 <RowDefinition Height="*"/>

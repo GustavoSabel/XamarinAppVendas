@@ -28,6 +28,7 @@ namespace AppVendas.ViewModels
             Unidade = produto.Unidade;
             Valor = produto.Valor;
             ValorUnitario = produto.ValorUnitario;
+            Quantidade = produto.Quantidade;
         }
 
         public int Id { get; private set; }

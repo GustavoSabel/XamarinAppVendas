@@ -8,7 +8,7 @@
 
     <Application.Resources>
         <ResourceDictionary>
-            <Thickness x:Key="PaddingGrid" Left="10" Top="10" Right="10" Bottom="10"/>
+            <Thickness x:Key="PaddingTela" Left="10" Top="10" Right="10" Bottom="10"/>
         </ResourceDictionary>
     </Application.Resources>
     
