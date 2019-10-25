@@ -25,7 +25,7 @@ namespace AppVendas.ViewModels
         internal async Task Carregar(Cliente cliente)
         {
             Loaded = true;
-            Pedidos = (await _dataStoreVendas.ObterPorCliente(cliente.Id)).ToList();
+            Pedidos = (await _dataStoreVendas.ObterPorCliente(cliente.Id).ConfigureAwait(false)).ToList();
             ClienteNomeFantasia = cliente.NomeFantasia;
             OnPropertyChanged(nameof(ClienteNomeFantasia));
             OnPropertyChanged(nameof(Pedidos));

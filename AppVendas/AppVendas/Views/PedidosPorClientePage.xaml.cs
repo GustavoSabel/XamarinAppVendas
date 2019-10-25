@@ -24,14 +24,14 @@ namespace AppVendas.Views
         {
             base.OnAppearing();
             if (!viewModel.Loaded)
-                await viewModel.Carregar(_cliente);
+                await viewModel.Carregar(_cliente).ConfigureAwait(false);
         }
 
         private async void TapGestureRecognizer_Tapped(object sender, System.EventArgs e)
         {
             var tappedEventArgs = (TappedEventArgs)e;
             var pedido = (Pedido)tappedEventArgs.Parameter;
-            await Navigation.PushAsync(new PedidoPage(pedido.Id));
+            await Navigation.PushAsync(new PedidoPage(pedido.Id)).ConfigureAwait(false);
         }
     }
 }

@@ -21,12 +21,12 @@ namespace AppVendas.Views
 
         private async void BtnNovoPedido_Clicked(object sender, System.EventArgs e)
         {
-            await Navigation.PushAsync(new NovoPedidoPage(_cliente));
+            await Navigation.PushAsync(new NovoPedidoPage(_cliente)).ConfigureAwait(false);
         }
 
         private async void BtnPedidosAnteriores_Clicked(object sender, System.EventArgs e)
         {
-            await Navigation.PushAsync(new PedidosPorClientePage(_cliente));
+            await Navigation.PushAsync(new PedidosPorClientePage(_cliente)).ConfigureAwait(false);
         }
     }
 }

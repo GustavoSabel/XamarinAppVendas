@@ -31,7 +31,7 @@ namespace AppVendas.Views
         {
             var tappedEventArgs = (TappedEventArgs)e;
             var cliente = (Cliente)tappedEventArgs.Parameter;
-            await Navigation.PushAsync(new ClientePage(cliente));
+            await Navigation.PushAsync(new ClientePage(cliente)).ConfigureAwait(false);
         }
 
         private void SearchBar_TextChanged(object sender, TextChangedEventArgs e)

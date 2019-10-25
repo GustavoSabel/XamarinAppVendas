@@ -99,7 +99,8 @@ namespace AppVendas.Services
 
         public Task<IEnumerable<Pedido>> ObterPorCliente(int clienteId)
         {
-            return Task.FromResult(Entidades.Where(x => x.ClienteId == clienteId));
+            var ultimosPedios = Entidades.Where(x => x.ClienteId == clienteId).OrderByDescending(x => x.Data).ToList();
+            return Task.FromResult((IEnumerable<Pedido>)ultimosPedios);
         }
     }
 }

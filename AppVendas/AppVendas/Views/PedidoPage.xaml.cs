@@ -23,7 +23,7 @@ namespace AppVendas.Views
         {
             base.OnAppearing();
             if (!viewModel.Loaded)
-                await viewModel.Carregar(_pedidoId);
+                await viewModel.Carregar(_pedidoId).ConfigureAwait(false);
         }
     }
 }

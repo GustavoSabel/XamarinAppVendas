@@ -28,7 +28,7 @@ namespace AppVendas.Views
             base.OnAppearing();
             if (!viewModel.Loaded)
             {
-                await viewModel.Carregar(_cliente.Id);
+                await viewModel.Carregar(_cliente.Id).ConfigureAwait(false);
             }
         }
 
@@ -39,7 +39,7 @@ namespace AppVendas.Views
 
         private void BtnCarrinho_Clicked(object sender, System.EventArgs e)
         {
-            Navigation.PushAsync(new CarrinhoPage(viewModel.Produtos));
+            Navigation.PushAsync(new CarrinhoPage(_cliente, viewModel.Produtos));
         }
     }
 }

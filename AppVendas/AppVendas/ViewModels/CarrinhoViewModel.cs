@@ -1,7 +1,6 @@
 ﻿using AppVendas.ViewModels.Base;
 using System.Collections.Generic;
 using System.Linq;
-using static AppVendas.ViewModels.NovoPedidoViewModel;
 
 namespace AppVendas.ViewModels
 {

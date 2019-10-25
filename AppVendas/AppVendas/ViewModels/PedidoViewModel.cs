@@ -14,7 +14,7 @@ namespace AppVendas.ViewModels
 
         public string ClienteRazaoSocial { get; set; }
 
-        public List<ProdutoViewModel> Produtos { get; set; }
+        public List<ProdutoViewModel> Produtos { get; private set; }
 
         public decimal ValorTotal { get; set; }
 
@@ -31,8 +31,8 @@ namespace AppVendas.ViewModels
         public async Task Carregar(int pedidoId)
         {
             Loaded = true;
-            var pedido = await _dataStorePedido.GetAsync(pedidoId);
-            var cliente = await _dataStoreClientes.GetAsync(pedido.ClienteId);
+            var pedido = await _dataStorePedido.GetAsync(pedidoId).ConfigureAwait(false);
+            var cliente = await _dataStoreClientes.GetAsync(pedido.ClienteId).ConfigureAwait(true);
 
             ClienteRazaoSocial = cliente.RazaoSocial;
             Data = pedido.Data;
