@@ -13,6 +13,7 @@
     <ContentPage.Resources>
         <ResourceDictionary>
             <localConverters:IsNotEmptyConverter x:Key="IsNotEmpty" />
+            <localConverters:ByteArrayToImageSourceConverter x:Key="ByteArrayToImageSource" />
         </ResourceDictionary>
     </ContentPage.Resources>
     
@@ -35,8 +36,8 @@
                             </Grid.ColumnDefinitions>
 
                             <Label Grid.ColumnSpan="2" Text="{Binding Descricao}" FontSize="Medium" FontAttributes="Bold"/>
-                            
-                            <Image Grid.Column="0" Grid.Row="1" Source="sem_foto.png" WidthRequest="80" />
+
+                            <Image Grid.Column="0" Grid.Row="1" Source="{Binding Foto}" WidthRequest="80" />
 
 
                             <StackLayout Grid.Row="1" Grid.Column="1" Orientation="Horizontal">

@@ -4,6 +4,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Xamarin.Forms;
 
 namespace AppVendas.Services
 {
@@ -11,90 +12,68 @@ namespace AppVendas.Services
     {
         protected override IEnumerable<Pedido> Load()
         {
+            var produtoServico = DependencyService.Get<IDataStoreProdutos>();
+            var produto1 = produtoServico.GetAsync(1).Result;
+            var produto2 = produtoServico.GetAsync(2).Result;
+            var produto3 = produtoServico.GetAsync(3).Result;
+
             var vendas = new List<Pedido>
             {
                 new Pedido
                 {
                     Id = 1,
                     ClienteId = 1,
-                    ValorTotal = 300,
                     Data = new DateTime(2019,10,1,15,00,00),
                     Produtos = new List<ProdutoPedido>
-                    {
-                        new ProdutoPedido
-                        {
-                            ProdutoId = 1,
-                            Descricao = "Beterraba em conserva 12x500g Danimar",
-                            Unidade = "CX12",
-                            Valor = 70m,
-                            ValorUnitario = 5.83m,
-                            Quantidade = 10,
-                            ValorTotal = 500
-                        },
-                        new ProdutoPedido
-                        {
-                            ProdutoId = 2,
-                            Descricao = "Ovos de codorna em conserva 15x300 DANIMAR",
-                            Unidade = "CX12",
-                            Valor = 20m,
-                            ValorUnitario = 5.83m,
-                            Quantidade = 20,
-                            ValorTotal = 200
-                        },
-                        new ProdutoPedido
-                        {
-                            ProdutoId = 3,
-                            Descricao = "Beterraba em conserva 12x500g Danimar",
-                            Unidade = "CX15",
-                            Valor = 10m,
-                            ValorUnitario = 5.83m,
-                            Quantidade = 05,
-                            ValorTotal = 700
-                        }
+                    { 
+                        Criar(produto1, 10),
+                        Criar(produto2, 15),
+                        Criar(produto3, 17),
                     }
                 },
                 new Pedido
                 {
                     Id = 2,
                     ClienteId = 1,
-                    ValorTotal = 1000,
                     Data = new DateTime(2019,5,15,17,30,00),
                     Produtos = new List<ProdutoPedido>
                     {
-                        new ProdutoPedido
-                        {
-                            ProdutoId = 1,
-                            Descricao = "Ovos de codorna em conserva 15x300 DANIMAR",
-                            Unidade = "CX15",
-                            Valor = 77.50m,
-                            ValorUnitario = 5.83m,
-                            Quantidade = 40,
-                            ValorTotal = 1000
-                        }
+                        Criar(produto1, 20),
                     }
                 },
                 new Pedido
                 {
                     Id = 3,
                     ClienteId = 1,
-                    ValorTotal = 800.75m,
                     Data = new DateTime(2018,12,1,08,00,00),
                     Produtos = new List<ProdutoPedido>
                     {
-                        new ProdutoPedido
-                        {
-                            ProdutoId = 1,
-                            Descricao = "Beterraba em conserva 12x500g Danimar",
-                            Unidade = "CX12",
-                            Valor = 70m,
-                            ValorUnitario = 5.83m,
-                            Quantidade = 50,
-                            ValorTotal = 700
-                        }
+                         Criar(produto3, 50),
                     }
                 }
             };
+
+            foreach (var venda in vendas)
+            {
+                venda.ValorTotal = venda.Produtos.Sum(x => x.ValorTotal);
+            }
+
             return vendas;
+        }
+
+        private static ProdutoPedido Criar(Produto produto, decimal qtd)
+        {
+            return new ProdutoPedido
+            {
+                ProdutoId = produto.Id,
+                Descricao = produto.Descricao,
+                Unidade = produto.Unidade,
+                Valor = produto.Valor,
+                ValorUnitario = produto.ValorUnitario,
+                Quantidade = qtd,
+                ValorTotal = produto.Valor * qtd,
+                Foto = produto.Foto
+            };
         }
 
         public Task<IEnumerable<Pedido>> ObterPorCliente(int clienteId)
