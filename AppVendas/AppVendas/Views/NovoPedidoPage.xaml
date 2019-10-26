@@ -39,7 +39,6 @@
 
                             <Image Grid.Column="0" Grid.Row="1" Source="{Binding Foto}" WidthRequest="80" />
 
-
                             <StackLayout Grid.Row="1" Grid.Column="1" Orientation="Horizontal">
 
                                 <StackLayout Orientation="Vertical" HorizontalOptions="FillAndExpand">
@@ -86,17 +85,19 @@
                 </CollectionView.ItemTemplate>
             </CollectionView>
 
-            <StackLayout Orientation="Horizontal" HorizontalOptions="End" >
-                <Label Text="{Binding ValorTotal, StringFormat='Valor total: {0:c2}'}" FontSize="Large" FontAttributes="Bold"  />
-                <ImageButton 
-                    Source="{localMarkups:ImageResource Source='AppVendas.Resources.shopping_cart_64.png'}"
-                    WidthRequest="70"
-                    HeightRequest="40"
-                    BackgroundColor="Transparent"
-                    Clicked="BtnCarrinho_Clicked"
-                    />
+            <StackLayout Orientation="Horizontal" HorizontalOptions="Center" Padding="5" >
+
+                <Label Text="{Binding ValorTotal, StringFormat='Total: {0:c2}'}" FontSize="Large" FontAttributes="Bold" Margin="0, 8, 0, 0"  />
+                <Button Text="Carrinho" Clicked="BtnCarrinho_Clicked" FontSize="Medium" FontAttributes="Bold"/>
+                <!--<ImageButton 
+                        Source="{localMarkups:ImageResource Source='AppVendas.Resources.shopping_cart_64.png'}"
+                        WidthRequest="70"
+                        HeightRequest="40"
+                        BackgroundColor="Transparent"
+                        Clicked="BtnCarrinho_Clicked"
+                        />-->
             </StackLayout>
-            
+
         </StackLayout>
     </ContentPage.Content>
 </ContentPage>

@@ -10,7 +10,7 @@
     <ContentPage.Content>
         <StackLayout>
 
-            <Label Margin="{StaticResource PaddingTela}" Text="{Binding ClienteNomeFantasia}" FontSize="Large" FontAttributes="Bold" />
+            <!--<Label Margin="{StaticResource PaddingTela}" Text="{Binding ClienteNomeFantasia}" FontSize="Large" FontAttributes="Bold" />-->
 
             <CollectionView ItemsSource="{Binding Pedidos}" EmptyView="Nada" SelectionMode="Single">
                 <CollectionView.ItemTemplate>
@@ -21,20 +21,22 @@
                             </Grid.GestureRecognizers>
                             <Grid.RowDefinitions>
                                 <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="Auto"/>
                             </Grid.RowDefinitions>
                             <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="*"/>
                                 <ColumnDefinition Width="Auto"/>
+                                <ColumnDefinition Width="*"/>
                             </Grid.ColumnDefinitions>
-                            <Label Grid.Row="0" Grid.Column="0" Text="{Binding Data}" FontSize="Medium" />
-                            <Label Grid.Row="0" Grid.Column="1" Text="{Binding ValorTotal, StringFormat='Total: {0:c2}'}" FontSize="Medium"  />
+                            <Label Grid.Row="0" Grid.Column="0" Text="{Binding Data, StringFormat='{0:dd/MM/yyyy hh:mm}'}" FontSize="Medium" Margin="0,0,0,-5"/>
+                            <Label Grid.Row="0" Grid.Column="1" Text="{Binding ValorTotal, StringFormat='{0:c2}'}" FontSize="Medium" Margin="10,0,0,-5" />
+                            <BoxView Grid.Row="2" Grid.ColumnSpan="2" BackgroundColor="LightGray" HeightRequest="1" Margin="0, 0, 0, 0"/>
                         </Grid>
                     </DataTemplate>
                 </CollectionView.ItemTemplate>
             </CollectionView>
-
-            <Label Margin="{StaticResource PaddingTela}" Text="{Binding ValorTotal, StringFormat='Valor total: {0:c2}'}" FontSize="Large" FontAttributes="Bold" />
-                   
+            <StackLayout>
+                <Label Margin="{StaticResource PaddingTela}" Text="{Binding ValorTotal, StringFormat='Total: {0:c2}'}" FontSize="Large" FontAttributes="Bold" />
+            </StackLayout>
         </StackLayout>
     </ContentPage.Content>
     

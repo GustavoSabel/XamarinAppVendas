@@ -18,6 +18,7 @@ namespace AppVendas.Views
             InitializeComponent();
             BindingContext = viewModel = new PedidosPorClienteViewModel(DependencyService.Get<IDataStorePedido>());
             _cliente = cliente;
+            Title = "Pedidos " + cliente.NomeFantasia;
         }
 
         protected async override void OnAppearing()

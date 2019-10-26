@@ -19,7 +19,7 @@
     <ContentPage.Content>
         <StackLayout>
             <SearchBar Placeholder="Filtro" TextChanged="SearchBar_TextChanged"/>
-            <CollectionView ItemsSource="{Binding Clientes}" EmptyView = "Nenhum cliente encontrado" SelectionMode="Single">
+            <CollectionView ItemsSource="{Binding Clientes}" EmptyView="Nenhum cliente encontrado" SelectionMode="Single">
                 <CollectionView.ItemTemplate>
                     <DataTemplate>
                         <Grid Padding="{StaticResource PaddingTela}">
@@ -30,9 +30,10 @@
                                 <RowDefinition Height="Auto" />
                                 <RowDefinition Height="Auto" />
                                 <RowDefinition Height="Auto" />
+                                <RowDefinition Height="Auto" />
                             </Grid.RowDefinitions>
                             <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="Auto" />
+                                <ColumnDefinition Width="*" />
                             </Grid.ColumnDefinitions>
 
                             <Label Grid.Column="0" Text="{Binding NomeFantasia}" FontAttributes="Bold" FontSize="Medium"/>
@@ -50,6 +51,7 @@
                                     FontAttributes="Italic" 
                                     VerticalOptions="End"/>
                             </StackLayout>
+                            <BoxView Grid.Row="3" BackgroundColor="LightGray" HeightRequest="1" />
                         </Grid>
                     </DataTemplate>
                 </CollectionView.ItemTemplate>

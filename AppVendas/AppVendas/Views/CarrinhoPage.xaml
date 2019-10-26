@@ -81,9 +81,9 @@
                 </CollectionView.ItemTemplate>
             </CollectionView>
 
-            <StackLayout Orientation="Vertical" HorizontalOptions="CenterAndExpand" >
-                <Label Text="{Binding ValorTotal, StringFormat='Valor total: {0:c2}'}" FontSize="Large" FontAttributes="Bold"  />
-                <Button Text="Finalizar" Clicked="BtnFinalizar_Clicked" FontAttributes="Bold" TextColor="Green"/>
+            <StackLayout Orientation="Horizontal" VerticalOptions="CenterAndExpand" HorizontalOptions="CenterAndExpand" >
+                <Label Text="{Binding ValorTotal, StringFormat='Total: {0:c2}'}" FontSize="Large" FontAttributes="Bold" Margin="8" />
+                <Button Text="Finalizar" Clicked="BtnFinalizar_Clicked" FontAttributes="Bold" TextColor="Green" FontSize="Medium"/>
             </StackLayout>
 
         </StackLayout>

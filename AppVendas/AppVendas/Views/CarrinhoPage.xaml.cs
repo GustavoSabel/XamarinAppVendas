@@ -21,7 +21,7 @@ namespace AppVendas.Views
 
             _cliente = cliente;
             BindingContext = viewModel = new CarrinhoViewModel(produtos);
-            Title = viewModel.Title;
+            Title = "Carrinho " + cliente.NomeFantasia;
         }
 
         private async void BtnFinalizar_Clicked(object sender, EventArgs e)

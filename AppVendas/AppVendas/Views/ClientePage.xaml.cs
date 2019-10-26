@@ -17,6 +17,7 @@ namespace AppVendas.Views
             InitializeComponent();
             _cliente = cliente;
             BindingContext = viewModel = new ClienteViewModel(cliente);
+            Title = cliente.NomeFantasia;
         }
 
         private async void BtnNovoPedido_Clicked(object sender, System.EventArgs e)

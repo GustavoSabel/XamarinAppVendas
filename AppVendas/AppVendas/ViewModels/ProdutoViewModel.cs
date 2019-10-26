@@ -55,6 +55,8 @@ namespace AppVendas.ViewModels
 
         public string ValorPorUnidade => Valor.ToString("c2") + " por " + Unidade;
 
+        public string QuantidadeCompradaComUnidadeEValor => Quantidade + " " + Unidade + " de " + Valor.ToString("c2");
+
         public decimal Quantidade
         {
             get => quantidade;

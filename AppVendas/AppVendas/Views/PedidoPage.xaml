@@ -9,27 +9,27 @@
     <ContentPage.Content>
         <StackLayout Padding="{StaticResource PaddingTela}">
             <Label Text="{Binding ValorTotal, StringFormat='Total: {0:c2}'}" FontSize="Large" FontAttributes="Bold"/>
-            <Label Text="{Binding Data}" FontSize="Medium" Margin="0, 0, 0, 20"/>
+            <Label Text="{Binding Data, StringFormat='Em: {0:dd/MM/yyyy hh:mm}'}" FontSize="Medium" Margin="0, 0, 0, 20"/>
 
-            <CollectionView ItemsSource="{Binding Produtos}" EmptyView="Nada" SelectionMode="Single">
+            <CollectionView ItemsSource="{Binding Produtos}" EmptyView="Nada">
                 <CollectionView.ItemTemplate>
                     <DataTemplate>
-                        <Grid Margin="15">
+                        <Grid>
                             <Grid.RowDefinitions>
                                 <RowDefinition Height="Auto"/>
                                 <RowDefinition Height="Auto"/>
                                 <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="*"/>
                             </Grid.RowDefinitions>
                             <Grid.ColumnDefinitions>
                                 <ColumnDefinition Width="Auto"/>
-                                <ColumnDefinition Width="Auto"/>
                                 <ColumnDefinition Width="*"/>
                             </Grid.ColumnDefinitions>
-                            <Label Grid.Row="0" Grid.ColumnSpan="3" Text="{Binding Descricao}" />
-                            <Label Grid.Row="1" Grid.Column="0" Margin="0, 0, 10, 0" Text="{Binding Quantidade, StringFormat='Qtd: {0}'}" />
-                            <Label Grid.Row="1" Grid.Column="1" Margin="0, 0, 10, 0" Text="{Binding Valor, StringFormat='Valor: {0:c2}'}" />
-                            <Label Grid.Row="1" Grid.Column="2" Text="{Binding ValorUnitario, StringFormat='Valor Unit.: {0:c2}'}" />
-                            <Label Grid.Row="2" Grid.ColumnSpan="3" Text="{Binding ValorTotal,StringFormat='Total: {0:c2}'}" FontAttributes="Bold" />
+                            <Label Grid.Row="0" Grid.ColumnSpan="2" Text="{Binding Descricao}" />
+                            <Label Grid.Row="1" Grid.Column="0" Margin="0, 0, 10, 0" Text="{Binding QuantidadeCompradaComUnidadeEValor}" />
+                            <Label Grid.Row="1" Grid.Column="1" Text="{Binding ValorUnitario, StringFormat='Valor Unit.: {0:c2}'}" />
+                            <Label Grid.Row="2" Grid.ColumnSpan="2" Text="{Binding ValorTotal,StringFormat='Total: {0:c2}'}" FontAttributes="Bold" />
+                            <BoxView Grid.Row="3" Grid.ColumnSpan="2" HeightRequest="1" BackgroundColor="LightGray"  Margin="0,0,0,15"/>
                         </Grid>
                     </DataTemplate>
                 </CollectionView.ItemTemplate>

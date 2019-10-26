@@ -16,7 +16,7 @@ namespace AppVendas.Views
         public NovoPedidoPage(Cliente cliente)
         {
             InitializeComponent();
-            Title = "Venda para " + cliente.NomeFantasia;
+            Title = "Novo pedido " + cliente.NomeFantasia;
 
             var dataStore = DependencyService.Get<IDataStoreProdutos>();
             BindingContext = viewModel = new NovoPedidoViewModel(dataStore);

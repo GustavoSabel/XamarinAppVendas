@@ -8,7 +8,7 @@
              Title="{Binding Title}">
     <ContentPage.Content>
         <StackLayout Padding="{StaticResource PaddingTela}">
-            <Label Text="{Binding NomeFantasia}" FontSize="Large" FontAttributes="Bold"/>
+            <Label Text="{Binding RazaoSocial}" FontSize="Large" FontAttributes="Bold"/>
             <Label Text="{Binding RazaoSocial}"/>
             <Label Text="{Binding CidadeEstado}"/>
             <Label Text="{Binding DataUltimoPedido}"/>
