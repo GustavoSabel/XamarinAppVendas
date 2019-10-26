@@ -32,15 +32,14 @@
 
                             <Label Grid.ColumnSpan="2" Text="{Binding Descricao}" FontSize="Medium" FontAttributes="Bold"/>
 
-                            <Image Grid.Column="0" Grid.Row="1" Source="sem_foto.png" WidthRequest="100" />
+                            <Image Grid.Column="0" Grid.Row="1" Source="sem_foto.png" WidthRequest="50" />
 
 
                             <StackLayout Grid.Row="1" Grid.Column="1" Orientation="Horizontal">
 
                                 <StackLayout Orientation="Vertical" HorizontalOptions="FillAndExpand">
-                                    <Label Text="{Binding Unidade}"/>
-                                    <Label Text="{Binding Valor, StringFormat='Valor: {0:c2}'}"/>
-                                    <Label Text="{Binding ValorUnitario, StringFormat='Valor Unit.: {0:c2}'}"/>
+                                    <Label Text="{Binding ValorPorUnidade}"/>
+                                    <Label Text="{Binding ValorUnitario, StringFormat='{0:c2} por unid.'}"/>
                                     <Label Text="{Binding ValorTotal, Mode=OneWay, StringFormat='Total: {0:c2}'}" FontSize="Medium"/>
                                 </StackLayout>
 
@@ -48,6 +47,7 @@
                                     <Entry 
                                         Text="{Binding Quantidade, Mode=TwoWay}" 
                                         Keyboard="Numeric" 
+                                        HorizontalTextAlignment="End"
                                         WidthRequest="50" >
                                         <Entry.Behaviors>
                                             <localBehaviors:NumberMaskedBehavior/>
@@ -81,9 +81,9 @@
                 </CollectionView.ItemTemplate>
             </CollectionView>
 
-            <StackLayout Orientation="Horizontal" HorizontalOptions="End" >
+            <StackLayout Orientation="Vertical" HorizontalOptions="CenterAndExpand" >
                 <Label Text="{Binding ValorTotal, StringFormat='Valor total: {0:c2}'}" FontSize="Large" FontAttributes="Bold"  />
-                <Button Text="Finalizar" Clicked="BtnFinalizar_Clicked"/>
+                <Button Text="Finalizar" Clicked="BtnFinalizar_Clicked" FontAttributes="Bold" TextColor="Green"/>
             </StackLayout>
 
         </StackLayout>

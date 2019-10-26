@@ -36,15 +36,14 @@
 
                             <Label Grid.ColumnSpan="2" Text="{Binding Descricao}" FontSize="Medium" FontAttributes="Bold"/>
                             
-                            <Image Grid.Column="0" Grid.Row="1" Source="sem_foto.png" WidthRequest="100" />
+                            <Image Grid.Column="0" Grid.Row="1" Source="sem_foto.png" WidthRequest="80" />
 
 
                             <StackLayout Grid.Row="1" Grid.Column="1" Orientation="Horizontal">
 
                                 <StackLayout Orientation="Vertical" HorizontalOptions="FillAndExpand">
-                                    <Label Text="{Binding Unidade}"/>
-                                    <Label Text="{Binding Valor, StringFormat='Valor: {0:c2}'}"/>
-                                    <Label Text="{Binding ValorUnitario, StringFormat='Valor Unit.: {0:c2}'}"/>
+                                    <Label Text="{Binding ValorPorUnidade}"/>
+                                    <Label Text="{Binding ValorUnitario, StringFormat='{0:c2} por unid.'}" FontSize="Small"/>
                                     <Label Text="{Binding ValorTotal, Mode=OneWay, StringFormat='Total: {0:c2}'}" FontSize="Medium"/>
                                 </StackLayout> 
 
@@ -52,6 +51,7 @@
                                     <Entry 
                                         Text="{Binding Quantidade, Mode=TwoWay}" 
                                         Keyboard="Numeric" 
+                                        HorizontalTextAlignment="End"
                                         WidthRequest="50">
                                         <Entry.Behaviors>
                                             <localBehaviors:NumberMaskedBehavior/>

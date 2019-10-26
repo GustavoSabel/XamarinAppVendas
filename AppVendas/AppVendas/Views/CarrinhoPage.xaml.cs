@@ -47,7 +47,7 @@ namespace AppVendas.Views
 
             await pedidoStore.AddAsync(pedido).ConfigureAwait(false);
 
-            await DisplayAlert("Sucesso", "Pedido criado com sucesso!", "OK").ConfigureAwait(true);
+            await DisplayAlert("Sucesso!", "Pedido criado com sucesso", "OK").ConfigureAwait(true);
 
             for (var counter = 1; counter < 2; counter++)
                 Navigation.RemovePage(Navigation.NavigationStack[Navigation.NavigationStack.Count - 2]);

@@ -37,6 +37,8 @@ namespace AppVendas.ViewModels
         public decimal Valor { get; private set; }
         public decimal ValorUnitario { get; private set; }
 
+        public string ValorPorUnidade => Valor.ToString("c2") + " por " + Unidade;
+
         public decimal Quantidade
         {
             get => quantidade;
