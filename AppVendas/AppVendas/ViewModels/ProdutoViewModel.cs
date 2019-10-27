@@ -38,7 +38,6 @@ namespace AppVendas.ViewModels
             Valor = produto.Valor;
             ValorUnitario = produto.ValorUnitario;
             Quantidade = produto.Quantidade;
-            Foto = Converter(produto.Foto);
         }
 
         private ImageSource Converter(byte[] foto)

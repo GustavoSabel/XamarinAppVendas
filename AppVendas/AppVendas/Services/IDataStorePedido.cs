@@ -7,6 +7,6 @@ namespace AppVendas.Services
 {
     public interface IDataStorePedido : IDataStore<Pedido>
     {
-        Task<IEnumerable<Pedido>> ObterPorCliente(int clienteId);
+        Task<List<Pedido>> ObterPorCliente(int clienteId);
     }
 }

@@ -3,9 +3,8 @@ using System;
 
 namespace AppVendas.Models
 {
-    public class Cliente : IEntidade
+    public class Cliente : Entidade
     {
-        public int Id { get; set; }
         public string RazaoSocial { get; set; }
         public string NomeFantasia { get; set; }
         public string Cidade { get; set; }
