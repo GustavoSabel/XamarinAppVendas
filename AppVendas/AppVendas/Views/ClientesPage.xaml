@@ -4,6 +4,7 @@
              xmlns:d="http://xamarin.com/schemas/2014/forms/design"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:local="clr-namespace:AppVendas.Converters"
+             xmlns:components="clr-namespace:AppVendas.Views.Components"
              mc:Ignorable="d"
              x:Class="AppVendas.Views.ClientesPage"
              Title="{Binding Title}">
@@ -15,9 +16,10 @@
             <local:IsNotNullConverter x:Key="IsNotNull" />
         </ResourceDictionary>
     </ContentPage.Resources>
-    
+
     <ContentPage.Content>
         <StackLayout>
+            <components:LabelSemInternet/>
             <SearchBar Placeholder="Filtro" TextChanged="SearchBar_TextChanged"/>
             <CollectionView ItemsSource="{Binding Clientes}" EmptyView="Nenhum cliente encontrado" SelectionMode="Single">
                 <CollectionView.ItemTemplate>

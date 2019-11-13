@@ -9,6 +9,11 @@ namespace AppVendas.ViewModels.Base
     {
         public void RaisePropertyChanged<T>(Expression<Func<T>> property)
         {
+            if (property is null)
+            {
+                throw new ArgumentNullException(nameof(property));
+            }
+
             var name = GetMemberInfo(property).Name;
             OnPropertyChanged(name);
         }

@@ -1,6 +1,8 @@
-﻿using AppVendas.Models;
+﻿using System;
+using AppVendas.Models;
 using AppVendas.Services;
 using AppVendas.ViewModels;
+using Xamarin.Essentials;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 

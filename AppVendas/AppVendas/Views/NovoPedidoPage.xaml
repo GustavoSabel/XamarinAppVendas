@@ -6,6 +6,7 @@
              xmlns:localBehaviors="clr-namespace:AppVendas.Behaviors"
              xmlns:localMarkups="clr-namespace:AppVendas.MarkupExtensions;assembly=AppVendas"
              xmlns:localConverters="clr-namespace:AppVendas.Converters"
+             xmlns:components="clr-namespace:AppVendas.Views.Components"
              mc:Ignorable="d"
              Title="{Binding Title}"
              x:Class="AppVendas.Views.NovoPedidoPage">
@@ -19,7 +20,9 @@
     
     <ContentPage.Content>
         <StackLayout>
-
+            
+            <components:LabelSemInternet/>
+            
             <SearchBar Placeholder="Filtro" TextChanged="SearchBar_TextChanged"/>
 
             <CollectionView ItemsSource="{Binding Produtos}" EmptyView="Nenhum produto encontrado">
