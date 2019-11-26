@@ -37,6 +37,9 @@
     <Compile Update="Views\CarrinhoPage.xaml.cs">
       <DependentUpon>CarrinhoPage.xaml</DependentUpon>
     </Compile>
+    <Compile Update="Views\LoginPage.xaml.cs">
+      <DependentUpon>LoginPage.xaml</DependentUpon>
+    </Compile>
     <Compile Update="Views\PedidoPage.xaml.cs">
       <DependentUpon>PedidoPage.xaml</DependentUpon>
     </Compile>
@@ -65,6 +68,9 @@
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
     <EmbeddedResource Update="Views\HomePage.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Views\LoginPage.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
     <EmbeddedResource Update="Views\NovoPedidoPage.xaml">

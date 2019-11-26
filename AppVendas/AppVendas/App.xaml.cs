@@ -10,6 +10,9 @@ namespace AppVendas
 {
     public partial class App : Application
     {
+        public const string EVENT_LAUNCH_LOGIN_PAGE = "EVENT_LAUNCH_LOGIN_PAGE";
+        public const string EVENT_LAUNCH_MAIN_PAGE = "EVENT_LAUNCH_MAIN_PAGE";
+
         public App()
         {
             InitializeComponent();
@@ -29,6 +32,19 @@ namespace AppVendas
             DependencyService.Register<MockDataStoreProdutos>();
             DependencyService.Register<MockDataStorePedido>();
 
+            MainPage = new AppShell();
+
+            MessagingCenter.Subscribe<object>(this, EVENT_LAUNCH_LOGIN_PAGE, SetLoginPageAsRootPage);
+            MessagingCenter.Subscribe<object>(this, EVENT_LAUNCH_MAIN_PAGE, SetMainPageAsRootPage);
+        }
+
+        private void SetLoginPageAsRootPage(object sender)
+        {
+            MainPage = new LoginPage();
+        }
+
+        private void SetMainPageAsRootPage(object sender)
+        {
             MainPage = new AppShell();
         }
 

@@ -3,15 +3,9 @@
        xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
        xmlns:views="clr-namespace:AppVendas.Views"
        x:Class="AppVendas.Views.AppShell">
-    <!--<FlyoutItem Title="Vendas"
-                FlyoutDisplayOptions="AsMultipleItems">
-        <ShellContent Title="Clientes">
-            <views:ClientesPage />
-        </ShellContent>
-        <ShellContent Title="Home">
-            <views:HomePage />
-        </ShellContent>
-    </FlyoutItem>-->
+    
     <views:ClientesPage/>
     <views:HomePage/>
+
+    <MenuItem Text="Logoff" Command="{Binding LogoffCommand}"></MenuItem>
 </Shell>
