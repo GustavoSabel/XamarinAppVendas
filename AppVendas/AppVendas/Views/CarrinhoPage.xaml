@@ -7,9 +7,9 @@
              xmlns:localMarkups="clr-namespace:AppVendas.MarkupExtensions;assembly=AppVendas"
              xmlns:localConverters="clr-namespace:AppVendas.Converters"
              xmlns:localBehaviors="clr-namespace:AppVendas.Behaviors"
-             xmlns:components="clr-namespace:AppVendas.Views.Components"
+             xmlns:controls="clr-namespace:AppVendas.Views.Controls"
              x:Class="AppVendas.Views.CarrinhoPage">
-    
+
     <ContentPage.Resources>
         <ResourceDictionary>
             <localConverters:IsNotEmptyConverter x:Key="IsNotEmpty" />
@@ -18,9 +18,12 @@
 
     <ContentPage.Content>
         <StackLayout>
-            <components:LabelSemInternet/>
-            
-            <CollectionView ItemsSource="{Binding ProdutosComQuantidade}" EmptyView="Nenhum produto adicionado ao carrinho">
+            <controls:LabelSemInternet/>
+
+            <CollectionView ItemsSource="{Binding ProdutosComQuantidade}">
+                <CollectionView.EmptyView>
+                    <controls:LabelEmptyView Texto="Nenhum produto adicionado ao carrinho"/>
+                </CollectionView.EmptyView>
                 <CollectionView.ItemTemplate>
                     <DataTemplate>
                         <Grid Padding="{StaticResource PaddingTela}">

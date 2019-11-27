@@ -6,7 +6,7 @@
              xmlns:localBehaviors="clr-namespace:AppVendas.Behaviors"
              xmlns:localMarkups="clr-namespace:AppVendas.MarkupExtensions;assembly=AppVendas"
              xmlns:localConverters="clr-namespace:AppVendas.Converters"
-             xmlns:components="clr-namespace:AppVendas.Views.Components"
+             xmlns:components="clr-namespace:AppVendas.Views.Controls"
              mc:Ignorable="d"
              Title="{Binding Title}"
              x:Class="AppVendas.Views.NovoPedidoPage">

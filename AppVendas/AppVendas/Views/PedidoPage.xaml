@@ -3,18 +3,21 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:d="http://xamarin.com/schemas/2014/forms/design"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-             xmlns:components="clr-namespace:AppVendas.Views.Components"
+             xmlns:controls="clr-namespace:AppVendas.Views.Controls"
              mc:Ignorable="d"
              x:Class="AppVendas.Views.PedidoPage"
              Title="{Binding Title}">
     <ContentPage.Content>
         <StackLayout>
-            <components:LabelSemInternet/>
+            <controls:LabelSemInternet/>
             <StackLayout Padding="{StaticResource PaddingTela}">
                 <Label Text="{Binding ValorTotal, StringFormat='Total: {0:c2}'}" FontSize="Large" FontAttributes="Bold"/>
                 <Label Text="{Binding Data, StringFormat='Em: {0:dd/MM/yyyy hh:mm}'}" FontSize="Medium" Margin="0, 0, 0, 20"/>
 
-                <CollectionView ItemsSource="{Binding Produtos}" EmptyView="Nada">
+                <CollectionView ItemsSource="{Binding Produtos}">
+                    <CollectionView.EmptyView>
+                        <controls:LabelEmptyView Texto="Nenhum produto encontrado"/>
+                    </CollectionView.EmptyView>
                     <CollectionView.ItemTemplate>
                         <DataTemplate>
                             <Grid>

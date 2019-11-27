@@ -7,9 +7,42 @@
              x:Class="AppVendas.App">
 
     <Application.Resources>
+        
         <ResourceDictionary>
             <Thickness x:Key="PaddingTela" Left="10" Top="10" Right="10" Bottom="10"/>
+
+            <Color x:Key="background">#2f4259</Color>
+            <Color x:Key="primaria">#1ec3d5</Color>
+            <Color x:Key="secundaria">#ffffff</Color>
+
+            <Style TargetType="ContentPage" ApplyToDerivedTypes="True">
+                <Setter Property="BackgroundColor" Value="{StaticResource background}" />
+            </Style>
+
+            <Style TargetType="SearchBar">
+                <Setter Property="PlaceholderColor" Value="{StaticResource secundaria}" />
+            </Style>
+
+            <Style TargetType="Label">
+                <Setter Property="TextColor" Value="{StaticResource primaria}" />
+            </Style>
+
+            <Style TargetType="Button">
+                <Setter Property="TextColor" Value="{StaticResource secundaria}" />
+                <Setter Property="BackgroundColor" Value="{StaticResource primaria}" />
+            </Style>
+
+            <Style TargetType="Entry">
+                <Setter Property="TextColor" Value="{StaticResource primaria}" />
+                <Setter Property="PlaceholderColor" Value="{StaticResource secundaria}" />
+            </Style>
+
+            <Style TargetType="Editor">
+                <Setter Property="TextColor" Value="{StaticResource primaria}" />
+            </Style>
+
         </ResourceDictionary>
+
     </Application.Resources>
     
 </Application>

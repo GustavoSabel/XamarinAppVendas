@@ -2,10 +2,33 @@
 <Shell xmlns="http://xamarin.com/schemas/2014/forms"
        xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
        xmlns:views="clr-namespace:AppVendas.Views"
-       x:Class="AppVendas.Views.AppShell">
-    
-    <views:ClientesPage/>
-    <views:HomePage/>
+       x:Class="AppVendas.Views.AppShell" 
+       BackgroundColor="#223040" 
+       FlyoutBackgroundColor="#729DCD"
+       TitleColor="White"
+       >
 
-    <MenuItem Text="Logoff" Command="{Binding LogoffCommand}"></MenuItem>
+    <ShellContent Title="Cliente">
+        <views:ClientesPage/>
+    </ShellContent>
+
+    <ShellContent Title="Home">
+        <views:HomePage/>
+    </ShellContent>
+
+    <MenuItem Text="Logoff" Command="{Binding LogoffCommand}" />
+
+    <!--<views:ClientesPage/>
+    <views:HomePage/>
+    <MenuItem Text="Logoff" Command="{Binding LogoffCommand}"></MenuItem>-->
+
+    <!--<FlyoutItem>
+        <ShellContent Title="Clientes" >
+            <views:ClientesPage/>
+        </ShellContent>
+        <ShellContent Title="Home">
+            <views:HomePage/>
+        </ShellContent>
+    </FlyoutItem>-->
+
 </Shell>
