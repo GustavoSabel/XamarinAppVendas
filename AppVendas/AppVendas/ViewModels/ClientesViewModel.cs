@@ -54,7 +54,7 @@ namespace AppVendas.ViewModels
 
             try
             {
-                var items = await _dataStoreClientes.GetManyAsync();
+                var items = await _dataStoreClientes.GetManyAsync().ConfigureAwait(false);
                 _todosClientes = ConverterEmViewModel(items);
                 Clientes = _todosClientes.ToList();
 
@@ -63,6 +63,7 @@ namespace AppVendas.ViewModels
             catch (Exception ex)
             {
                 Debug.WriteLine(ex);
+                throw;
             }
             finally
             {

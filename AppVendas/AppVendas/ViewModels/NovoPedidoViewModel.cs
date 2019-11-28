@@ -52,7 +52,7 @@ namespace AppVendas.ViewModels
 
             try
             {
-                var items = await _dataStoreProdutos.ObterPorCliente(clienteId);
+                var items = await _dataStoreProdutos.ObterPorCliente(clienteId).ConfigureAwait(false);
                 _todosProdutos = ConverterParaViewModel(items);
                 Produtos = _todosProdutos.ToList();
                 Loaded = true;
@@ -60,6 +60,7 @@ namespace AppVendas.ViewModels
             catch (Exception ex)
             {
                 Debug.WriteLine(ex);
+                throw;
             }
             finally
             {
