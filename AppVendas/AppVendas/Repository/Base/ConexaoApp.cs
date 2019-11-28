@@ -1,5 +1,6 @@
 ﻿using AppVendas.Models;
 using AppVendas.Models.Base;
+using Polly;
 using SQLite;
 using System;
 using System.Collections;
@@ -11,14 +12,14 @@ namespace AppVendas.Services
 {
     public class ConexaoApp
     {
-        private readonly Lazy<SQLiteAsyncConnection> _conecao;
+        private readonly Lazy<SQLiteAsyncConnection> _connection;
 
         private static readonly string NomeBase =
-            Path.Combine(Xamarin.Essentials.FileSystem.AppDataDirectory, "SqliteDatabase5.db3");
+            Path.Combine(Xamarin.Essentials.FileSystem.AppDataDirectory, "SqliteDatabase.db3");
 
         private ConexaoApp()
         {
-            _conecao = new Lazy<SQLiteAsyncConnection>(() =>
+            _connection = new Lazy<SQLiteAsyncConnection>(() =>
             {
                 var con = new SQLiteAsyncConnection(NomeBase, SQLiteOpenFlags.ReadWrite | SQLiteOpenFlags.Create | SQLiteOpenFlags.SharedCache);
                 con.CreateTableAsync<Cliente>().Wait();
@@ -36,39 +37,45 @@ namespace AppVendas.Services
             return File.Exists(NomeBase);
         }
 
-        internal Task DeleteAsync(object obj) 
-        {
-            return _conecao.Value.DeleteAsync(obj);
-        }
-
         public AsyncTableQuery<T> Table<T>() where T : new()
         {
-            return _conecao.Value.Table<T>();
+            return _connection.Value.Table<T>();
         }
 
-        internal async Task InsertAsync<T>(T obj) where T : IEntidade
+        internal Task DeleteAsync(object obj)
         {
-            await _conecao.Value.InsertAsync(obj).ConfigureAwait(false);
+            return AttemptAndRetry(() => _connection.Value.DeleteAsync(obj));
+        }
+
+        internal Task InsertAsync<T>(T obj) where T : IEntidade
+        {
+            return AttemptAndRetry(() => _connection.Value.InsertAsync(obj));
         }
 
         internal Task<List<T>> QueryAsync<T>(string query, params object[] args) where T : new()
         {
-            return _conecao.Value.QueryAsync<T>(query, args);
+            return AttemptAndRetry(() => _connection.Value.QueryAsync<T>(query, args));
         }
 
         internal Task<int> InsertAllAsync(IEnumerable objects)
         {
-            return _conecao.Value.InsertAllAsync(objects);
+            return AttemptAndRetry(() => _connection.Value.InsertAllAsync(objects));
         }
 
         internal Task<int> UpdateAsync(object obj)
         {
-            return _conecao.Value.UpdateAsync(obj);
+            return AttemptAndRetry(() => _connection.Value.UpdateAsync(obj));
         }
 
         internal Task<int> ExecuteAsync(string query, params object[] args)
         {
-            return _conecao.Value.ExecuteAsync(query, args);
+            return AttemptAndRetry(() => _connection.Value.ExecuteAsync(query, args));
+        }
+
+        protected static Task<T> AttemptAndRetry<T>(Func<Task<T>> action, int numRetries = 3)
+        {
+            return Policy.Handle<SQLiteException>().WaitAndRetryAsync(numRetries, PollyRetryAttempt).ExecuteAsync(action);
+            static TimeSpan PollyRetryAttempt(int attemptNumber) => TimeSpan.FromSeconds(Math.Pow(2, attemptNumber));
         }
     }
 }
