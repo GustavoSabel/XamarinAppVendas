@@ -11,35 +11,29 @@ namespace AppVendas.Services
         public RepositoryBase()
         {
             Database = ConexaoApp.Instancia;
-            Database.Conecao.CreateTableAsync<T>().Wait();
         }
 
         public virtual Task<List<T>> ObterTodosAsync()
         {
-            return Database.Conecao.Table<T>().ToListAsync();
+            return Database.Table<T>().ToListAsync();
         }
 
         public virtual Task<T> ObterAsync(int id)
         {
-            return Database.Conecao.Table<T>().Where(i => i.Id == id).FirstOrDefaultAsync();
+            return Database.Table<T>().Where(i => i.Id == id).FirstOrDefaultAsync();
         }
 
         public virtual async Task SalvarAsync(T entidade)
         {
             if (entidade.Id != 0)
-            {
-                await Database.Conecao.UpdateAsync(entidade).ConfigureAwait(false);
-            }
+                await Database.UpdateAsync(entidade).ConfigureAwait(false);
             else
-            {
-                var id = await Database.Conecao.InsertAsync(entidade).ConfigureAwait(false);
-                entidade.Id = id;
-            }
+                await Database.InsertAsync(entidade).ConfigureAwait(false);
         }
 
         public virtual Task ExcluirAsync(T entidade)
         {
-            return Database.Conecao.DeleteAsync(entidade);
+            return Database.DeleteAsync(entidade);
         }
     }
 }

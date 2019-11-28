@@ -9,7 +9,7 @@ namespace AppVendas.Services.Mock.Helpers
 {
     static class CriadorBaseInicial
     {
-        public static async Task Criar()
+        public static async Task CriarDadosFake()
         {
             await InserirClientes().ConfigureAwait(false);
             await InserirProdutos().ConfigureAwait(false);
@@ -117,7 +117,7 @@ namespace AppVendas.Services.Mock.Helpers
             async Task InserirPedido(Pedido pedido)
             {
                 pedido.ValorTotal = pedido.Produtos.Sum(x => x.ValorTotal);
-                await pedidoRepository.SalvarAsync(pedido).ConfigureAwait(false);
+                await pedidoRepository.SalvarAsync(pedido).ConfigureAwait(true);
             }
         }
 

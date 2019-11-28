@@ -21,7 +21,7 @@ namespace AppVendas
 
             if (!ConexaoApp.BaseExiste())
             {
-                CriadorBaseInicial.Criar().Wait();
+                CriadorBaseInicial.CriarDadosFake().Wait();
             }
 
             DependencyService.Register<ClienteRepository>();

@@ -1,43 +1,74 @@
 ﻿using AppVendas.Models;
+using AppVendas.Models.Base;
 using SQLite;
 using System;
+using System.Collections;
+using System.Collections.Generic;
 using System.IO;
+using System.Threading.Tasks;
 
 namespace AppVendas.Services
 {
     public class ConexaoApp
     {
-        public SQLiteAsyncConnection Conecao { get; }
+        private readonly Lazy<SQLiteAsyncConnection> _conecao;
 
-        private ConexaoApp(string dbPath)
+        private static readonly string NomeBase =
+            Path.Combine(Xamarin.Essentials.FileSystem.AppDataDirectory, "SqliteDatabase5.db3");
+
+        private ConexaoApp()
         {
-            Conecao = new SQLiteAsyncConnection(dbPath);
-            Conecao.CreateTableAsync<Cliente>().Wait();
-            Conecao.CreateTableAsync<Produto>().Wait();
-            Conecao.CreateTableAsync<ProdutoPedido>().Wait();
-            Conecao.CreateTableAsync<Pedido>().Wait();
-        }
-
-
-        private static ConexaoApp _instancia;
-
-        private static readonly string NomeBase = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), "TodoSQLite.db3");
-
-        public static ConexaoApp Instancia
-        {
-            get
+            _conecao = new Lazy<SQLiteAsyncConnection>(() =>
             {
-                if (_instancia == null)
-                {
-                    _instancia = new ConexaoApp(NomeBase);
-                }
-                return _instancia;
-            }
+                var con = new SQLiteAsyncConnection(NomeBase, SQLiteOpenFlags.ReadWrite | SQLiteOpenFlags.Create | SQLiteOpenFlags.SharedCache);
+                con.CreateTableAsync<Cliente>().Wait();
+                con.CreateTableAsync<Produto>().Wait();
+                con.CreateTableAsync<ProdutoPedido>().Wait();
+                con.CreateTableAsync<Pedido>().Wait();
+                return con;
+            });
         }
+
+        public readonly static ConexaoApp Instancia = new ConexaoApp();
 
         public static bool BaseExiste()
         {
             return File.Exists(NomeBase);
+        }
+
+        internal Task DeleteAsync(object obj) 
+        {
+            return _conecao.Value.DeleteAsync(obj);
+        }
+
+        public AsyncTableQuery<T> Table<T>() where T : new()
+        {
+            return _conecao.Value.Table<T>();
+        }
+
+        internal async Task InsertAsync<T>(T obj) where T : IEntidade
+        {
+            await _conecao.Value.InsertAsync(obj).ConfigureAwait(false);
+        }
+
+        internal Task<List<T>> QueryAsync<T>(string query, params object[] args) where T : new()
+        {
+            return _conecao.Value.QueryAsync<T>(query, args);
+        }
+
+        internal Task<int> InsertAllAsync(IEnumerable objects)
+        {
+            return _conecao.Value.InsertAllAsync(objects);
+        }
+
+        internal Task<int> UpdateAsync(object obj)
+        {
+            return _conecao.Value.UpdateAsync(obj);
+        }
+
+        internal Task<int> ExecuteAsync(string query, params object[] args)
+        {
+            return _conecao.Value.ExecuteAsync(query, args);
         }
     }
 }

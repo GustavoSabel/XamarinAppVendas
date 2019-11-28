@@ -9,13 +9,13 @@ namespace AppVendas.Repository
     {
         public Task<List<Pedido>> ObterPorCliente(int clienteId)
         {
-            return Database.Conecao.QueryAsync<Pedido>($"SELECT * FROM Pedido WHERE ClienteId = ?", clienteId);
+            return Database.QueryAsync<Pedido>($"SELECT * FROM Pedido WHERE ClienteId = ?", clienteId);
         }
 
         public override async Task<Pedido> ObterAsync(int id)
         {
             var pedido = await base.ObterAsync(id).ConfigureAwait(false);
-            pedido.Produtos = await Database.Conecao.QueryAsync<ProdutoPedido>("SELECT * FROM ProdutoPedido WHERE PedidoId = ?", pedido.Id).ConfigureAwait(false);
+            pedido.Produtos = await Database.QueryAsync<ProdutoPedido>("SELECT * FROM ProdutoPedido WHERE PedidoId = ?", pedido.Id).ConfigureAwait(false);
             return pedido;
         }
 
@@ -26,21 +26,18 @@ namespace AppVendas.Repository
 
             if (pedido.Id != 0)
             {
-                await Database.Conecao.UpdateAsync(pedido).ConfigureAwait(false);
-                await Database.Conecao.ExecuteAsync("DELETE FROM ProdutoPedido WHERE PedidoId = ?", pedido.Id).ConfigureAwait(false);
+                await Database.UpdateAsync(pedido).ConfigureAwait(false);
+                await Database.ExecuteAsync("DELETE FROM ProdutoPedido WHERE PedidoId = ?", pedido.Id).ConfigureAwait(false);
             }
             else
             {
-                var id = await Database.Conecao.InsertAsync(pedido).ConfigureAwait(false);
-                pedido.Id = id;
+                await Database.InsertAsync(pedido).ConfigureAwait(false);
             }
 
             foreach (var produto in pedido.Produtos)
-            {
                 produto.PedidoId = pedido.Id;
-            }
 
-            await Database.Conecao.InsertAllAsync(pedido.Produtos).ConfigureAwait(false);
+            await Database.InsertAllAsync(pedido.Produtos).ConfigureAwait(false);
         }
     }
 }
