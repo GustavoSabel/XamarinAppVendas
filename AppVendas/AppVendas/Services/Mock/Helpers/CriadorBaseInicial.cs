@@ -1,4 +1,5 @@
-﻿using AppVendas.Models;
+﻿using AppVendas.Helpers;
+using AppVendas.Models;
 using AppVendas.Repository;
 using System;
 using System.Collections.Generic;
@@ -12,6 +13,7 @@ namespace AppVendas.Services.Mock.Helpers
         public static async Task CriarDadosFake()
         {
             await InserirClientes().ConfigureAwait(false);
+            await InserirUsuarios().ConfigureAwait(false);
             await InserirProdutos().ConfigureAwait(false);
             await InserirPedidos().ConfigureAwait(false);
         }
@@ -43,6 +45,29 @@ namespace AppVendas.Services.Mock.Helpers
                     EstadoSigla = estadoSigla,
                 }).ConfigureAwait(false);
             }
+        }
+
+        private static async Task InserirUsuarios()
+        {
+            var repository = new UsuarioRepository();
+            var usuario1 = await InserirUsuario("Gustavo", "gsabel", "1234").ConfigureAwait(false);
+            var usuario2 = await InserirUsuario("Joao", "joao", "1234").ConfigureAwait(false);
+            async Task<Usuario> InserirUsuario(string nome, string nomeUsuario, string senha)
+            {
+                var senhaHash = HashHelper.GerarHash(senha);
+                var usuario = new Usuario { Nome = nome, NomeUsuario = nomeUsuario, Senha = senhaHash };
+                await repository.SalvarAsync(usuario).ConfigureAwait(false);
+                return usuario;
+            }
+
+            //Vincular usuários com os clientes
+            var clientes = await new ClienteRepository().ObterTodosAsync().ConfigureAwait(false);
+            var lista = new List<UsuarioCliente>();
+            foreach (var c in clientes)
+                lista.Add(new UsuarioCliente() { ClienteId = c.Id, UsuarioId = usuario1.Id });
+            lista.Add(new UsuarioCliente { UsuarioId = usuario2.Id, ClienteId = clientes[0].Id });
+
+            await ConexaoApp.Instancia.InsertAllAsync(lista).ConfigureAwait(false);
         }
 
         private static async Task InserirProdutos()

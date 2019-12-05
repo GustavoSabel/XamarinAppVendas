@@ -8,9 +8,9 @@ namespace AppVendas.Services
 {
     public class MockDataStoreProdutos : DataStore<Produto, ProdutoRepository>, IDataStoreProdutos
     {
-        public async Task<IEnumerable<Produto>> ObterPorCliente(int clienteId)
+        public Task<IEnumerable<Produto>> ObterPorCliente(int clienteId)
         {
-            return await GetManyAsync().ConfigureAwait(false);
+            return GetManyAsync();
         }
     }
 }

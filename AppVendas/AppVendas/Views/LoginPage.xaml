@@ -12,11 +12,14 @@
                     FontSize="40" />
 
                 <Entry 
+                    x:Name="txtEmail"
                     TextColor="White" 
                     Placeholder="Email" 
                     HorizontalOptions="FillAndExpand"/>
 
-                <Entry TextColor="White" 
+                <Entry 
+                    x:Name="txtSenha"
+                    TextColor="White" 
                     Placeholder="Password" 
                     IsPassword="True"
                     HorizontalOptions="FillAndExpand"/>

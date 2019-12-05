@@ -24,10 +24,12 @@ namespace AppVendas
                 CriadorBaseInicial.CriarDadosFake().Wait();
             }
 
+            DependencyService.Register<UsuarioRepository>();
             DependencyService.Register<ClienteRepository>();
             DependencyService.Register<PedidoRepository>();
             DependencyService.Register<ProdutoRepository>();
 
+            DependencyService.Register<MockDataStoreUsuario>();
             DependencyService.Register<MockDataStoreClientes>();
             DependencyService.Register<MockDataStoreProdutos>();
             DependencyService.Register<MockDataStorePedido>();

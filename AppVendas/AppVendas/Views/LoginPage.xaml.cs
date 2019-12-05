@@ -1,8 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using AppVendas.Services;
+using System;
 
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
@@ -24,8 +21,11 @@ namespace AppVendas.Views
 
         private void Entrar_Clicked(object sender, EventArgs e)
         {
-            //await Navigation.PopModalAsync().ConfigureAwait(false);
-            MessagingCenter.Send<object>(this, App.EVENT_LAUNCH_MAIN_PAGE);
+            var dataStore = DependencyService.Get<IDataStoreUsuarios>();
+            if(dataStore.ValidarUsuarioSenha(txtEmail.Text, txtSenha.Text).Result != null)
+                MessagingCenter.Send<object>(this, App.EVENT_LAUNCH_MAIN_PAGE);
+            else
+                DisplayAlert("Autenticação", "Usuário e/ou senha inválido", "OK :(");
         }
     }
 }

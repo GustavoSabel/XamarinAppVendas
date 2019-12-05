@@ -22,6 +22,8 @@ namespace AppVendas.Services
             _connection = new Lazy<SQLiteAsyncConnection>(() =>
             {
                 var con = new SQLiteAsyncConnection(NomeBase, SQLiteOpenFlags.ReadWrite | SQLiteOpenFlags.Create | SQLiteOpenFlags.SharedCache);
+                con.CreateTableAsync<Usuario>().Wait();
+                con.CreateTableAsync<UsuarioCliente>().Wait();
                 con.CreateTableAsync<Cliente>().Wait();
                 con.CreateTableAsync<Produto>().Wait();
                 con.CreateTableAsync<ProdutoPedido>().Wait();
@@ -55,6 +57,11 @@ namespace AppVendas.Services
         internal Task<List<T>> QueryAsync<T>(string query, params object[] args) where T : new()
         {
             return AttemptAndRetry(() => _connection.Value.QueryAsync<T>(query, args));
+        }
+
+        internal Task<T> FindWithQueryAsync<T>(string query, params object[] args) where T : new()
+        {
+            return AttemptAndRetry(() => _connection.Value.FindWithQueryAsync<T>(query, args));
         }
 
         internal Task<int> InsertAllAsync(IEnumerable objects)
