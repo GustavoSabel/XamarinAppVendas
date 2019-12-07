@@ -1,6 +1,5 @@
 ﻿using AppVendas.Models;
 using AppVendas.Services;
-using AppVendas.Services.Base;
 using AppVendas.ViewModels.Base;
 using System;
 using System.Collections.Generic;
@@ -15,6 +14,7 @@ namespace AppVendas.ViewModels
     public class ClientesViewModel : BaseViewModel
     {
         private readonly IDataStoreClientes _dataStoreClientes;
+        private readonly int _usuarioId;
         private IReadOnlyList<Cliente> _todosClientes;
         private IReadOnlyList<Cliente> clientes;
 
@@ -38,11 +38,12 @@ namespace AppVendas.ViewModels
             Clientes = _todosClientes.Where(x => x.RazaoSocial.Contains(fitro, StringComparison.InvariantCultureIgnoreCase) || x.NomeFantasia.Contains(fitro, StringComparison.InvariantCultureIgnoreCase)).ToList();
         });
 
-        public ClientesViewModel(IDataStoreClientes dataStoreClientes)
+        public ClientesViewModel(IDataStoreClientes dataStoreClientes, int usuarioId)
         {
             _dataStoreClientes = dataStoreClientes;
+            _usuarioId = usuarioId;
             Title = "Clientes";
-            LoadCommand = new Command(async () => await ExecuteLoadItemsCommand());
+            LoadCommand = new Command(async () => await ExecuteLoadItemsCommand().ConfigureAwait(false));
         }
 
         async Task ExecuteLoadItemsCommand()
@@ -54,7 +55,7 @@ namespace AppVendas.ViewModels
 
             try
             {
-                var items = await _dataStoreClientes.GetManyAsync().ConfigureAwait(false);
+                var items = await _dataStoreClientes.ObterPorUsuario(_usuarioId).ConfigureAwait(false);
                 _todosClientes = ConverterEmViewModel(items);
                 Clientes = _todosClientes.ToList();
 

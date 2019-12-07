@@ -22,10 +22,19 @@ namespace AppVendas.Views
         private void Entrar_Clicked(object sender, EventArgs e)
         {
             var dataStore = DependencyService.Get<IDataStoreUsuarios>();
-            if(dataStore.ValidarUsuarioSenha(txtEmail.Text, txtSenha.Text).Result != null)
+
+            var usuarioLogado = dataStore.ValidarUsuarioSenha(txtEmail.Text, txtSenha.Text).Result;
+            if (usuarioLogado != null)
+            {
+                Application.Current.Properties.Add(App.PROPERTIES_USUARIO_ID, usuarioLogado.Id);
+                Application.Current.Properties.Add(App.PROPERTIES_USUARIO_NOME, usuarioLogado.Nome);
+                Application.Current.SavePropertiesAsync();
                 MessagingCenter.Send<object>(this, App.EVENT_LAUNCH_MAIN_PAGE);
+            }
             else
+            {
                 DisplayAlert("Autenticação", "Usuário e/ou senha inválido", "OK :(");
+            }
         }
     }
 }

@@ -16,7 +16,8 @@ namespace AppVendas.Views
         public ClientesPage()
         {
             InitializeComponent();
-            BindingContext = viewModel = new ClientesViewModel(DependencyService.Get<IDataStoreClientes>());
+            var usuarioId = (int)Application.Current.Properties[App.PROPERTIES_USUARIO_ID];
+            BindingContext = viewModel = new ClientesViewModel(DependencyService.Get<IDataStoreClientes>(), usuarioId);
         }
 
         protected override void OnAppearing()

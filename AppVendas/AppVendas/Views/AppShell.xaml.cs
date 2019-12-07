@@ -10,6 +10,9 @@ namespace AppVendas.Views
     {
         public ICommand LogoffCommand => new Command(() =>
         {
+            Application.Current.Properties.Remove(App.PROPERTIES_USUARIO_ID);
+            Application.Current.Properties.Remove(App.PROPERTIES_USUARIO_NOME);
+            Application.Current.SavePropertiesAsync();
             MessagingCenter.Send<object>(this, App.EVENT_LAUNCH_LOGIN_PAGE);
         });
 
@@ -17,7 +20,7 @@ namespace AppVendas.Views
         {
             InitializeComponent();
             BindingContext = this;
-            Navigation.PushModalAsync(new LoginPage());
+            //Navigation.PushModalAsync(new LoginPage());
         }
 
         private void MenuItem_Clicked(object sender, System.EventArgs e)
