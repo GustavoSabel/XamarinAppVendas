@@ -6,29 +6,33 @@
        BackgroundColor="#223040" 
        FlyoutBackgroundColor="#729DCD"
        TitleColor="White"
-       >
+       x:Name="this">
+
+    <Shell.FlyoutHeader>
+        <Grid BackgroundColor="{StaticResource background}" HeightRequest="50">
+            <Label 
+                Text="VENDAS"
+                TextColor="{StaticResource primaria}"
+                FontAttributes="Bold"
+                FontSize="Large"
+                HorizontalTextAlignment="Center"
+                VerticalTextAlignment="Start" />
+            <Label 
+                Text="{Binding NomeUsuario}"
+                TextColor="{StaticResource primaria}"
+                FontAttributes="Bold"
+                HorizontalTextAlignment="Center"
+                VerticalTextAlignment="End" />
+        </Grid>
+    </Shell.FlyoutHeader>
 
     <ShellContent Title="Cliente">
-        <views:ClientesPage/>
+        <views:ClientesPage />
     </ShellContent>
 
     <ShellContent Title="Home">
         <views:HomePage/>
     </ShellContent>
-
     <MenuItem Text="Logoff" Command="{Binding LogoffCommand}" />
-
-    <!--<views:ClientesPage/>
-    <views:HomePage/>
-    <MenuItem Text="Logoff" Command="{Binding LogoffCommand}"></MenuItem>-->
-
-    <!--<FlyoutItem>
-        <ShellContent Title="Clientes" >
-            <views:ClientesPage/>
-        </ShellContent>
-        <ShellContent Title="Home">
-            <views:HomePage/>
-        </ShellContent>
-    </FlyoutItem>-->
 
 </Shell>

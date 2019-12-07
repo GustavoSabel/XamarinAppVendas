@@ -16,11 +16,15 @@ namespace AppVendas.Views
             MessagingCenter.Send<object>(this, App.EVENT_LAUNCH_LOGIN_PAGE);
         });
 
+        public string NomeUsuario { get; set; }
+
         public AppShell()
         {
             InitializeComponent();
+
+            NomeUsuario = (string)Application.Current.Properties[App.PROPERTIES_USUARIO_NOME];
+
             BindingContext = this;
-            //Navigation.PushModalAsync(new LoginPage());
         }
 
         private void MenuItem_Clicked(object sender, System.EventArgs e)
