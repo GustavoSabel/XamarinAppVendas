@@ -6445,13 +6445,16 @@ namespace AppVendas.Droid
 			public const int splash_screen = 2131165498;
 			
 			// aapt resource value: 0x7F07013B
-			public const int tooltip_frame_dark = 2131165499;
+			public const int splash_screen2 = 2131165499;
 			
 			// aapt resource value: 0x7F07013C
-			public const int tooltip_frame_light = 2131165500;
+			public const int tooltip_frame_dark = 2131165500;
 			
 			// aapt resource value: 0x7F07013D
-			public const int xamarin_logo = 2131165501;
+			public const int tooltip_frame_light = 2131165501;
+			
+			// aapt resource value: 0x7F07013E
+			public const int xamarin_logo = 2131165502;
 			
 			static Drawable()
 			{
